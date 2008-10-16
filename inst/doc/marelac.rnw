@@ -1,0 +1,373 @@
+\documentclass[article,nojss]{jss}
+\DeclareGraphicsExtensions{.pdf,.eps}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Add-on packages and fonts
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+\newcommand{\noun}[1]{\textsc{#1}}
+%% Bold symbol macro for standard LaTeX users
+\providecommand{\boldsymbol}[1]{\mbox{\boldmath $#1$}}
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\m}{\textbf{\textsf{marelac }}}
+\newcommand{\R}{\proglang{R}}
+\title{\proglang{R}-package \m: utilities for the marine and lacustrine sciences }
+\Plaintitle{marelac}
+
+\Keywords{marine, lacustrine, science, datasets, constants, conversion,
+  \proglang{R}}
+
+\Plainkeywords{marine, lacustrine, science, datasets, constants, conversion, R}
+
+
+\author{Karline Soetaert\\
+NIOO-CEME\\
+The Netherlands
+\And
+Filip Meysman\\
+VUB\\
+Belgium}
+
+\Plainauthor{Karline Soetaert and Filip Meysman}
+
+\Abstract{ \R package \m \citep{marelac} contains datasets, chemical and physical constants
+and functions, routines for unit conversion, and other utilities useful for marine (oceans, seas) and lacustrine (lakes) sciences.
+
+The package also contains lecture notes for novice R-users.
+
+}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Karline Soetaert\\
+  Centre for Estuarine and Marine Ecology (CEME)\\
+  Netherlands Institute of Ecology (NIOO)\\
+  4401 NT Yerseke, Netherlands\\
+  E-mail: \email{k.soetaert@nioo.knaw.nl}\\
+  URL: \url{http://www.nioo.knaw.nl/ppages/ksoetaert}\\
+\\
+Filip Meysman\\
+Laboratory of Analytical and Environmental Chemistry\\
+Vrije Universiteit Brussel (VUB)\\
+Pleinlaan 2\\
+1050 Brussel, Belgium.\\
+E-mail: \email{filip.meysman@vub.ac.be}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% R/Sweave specific LaTeX commands.
+%% need no \usepackage{Sweave}
+%\VignetteIndexEntry{marine and lacustrine sciences}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Begin of the document
+\begin{document}
+\SweaveOpts{engine=R,eps=FALSE}
+\SweaveOpts{keep.source=TRUE}
+
+<<preliminaries,echo=FALSE,results=hide>>=
+library("marelac")
+options(prompt = "> ")
+@
+
+\maketitle
+
+\section{Introduction}
+Whereas \R is predominantly used as a statistical package, it is also very well
+suited for scientific computing, e.g. \citep{Soetaert08}.
+
+\R-package \m has been designed as a tool for use by scientists working in the marine and
+lacustrine sciences.
+
+It contains:
+\begin{itemize}
+\item data sets. These are mainly used in the lecture notes "Using R for scientific computing" \citep{lecture}, written
+as an introductory course for students that follow our course in ecological modelling, taught at the universities of
+Ghent and Brussels (by Filip Meysman and myself).
+\item chemical and physical constants, e.g. atomic weights, gas constants.
+\item conversion factors, e.g. gram to mol to liter conversions.
+\item functions, e.g. to estimate concentrations of conservative substances as a function of salinity, ...
+\end{itemize}
+
+
+\section{data sets}
+To date, there are  3 datasets
+\subsection{Bathymetry}
+
+This dataset, as used by \citep{Andersson04} contains elevations, in metres of the world at 1 dg intervals.
+Positive values are altitudes, negative values are ocean depths.
+
+Used to demonstrate \R's image and contouring capabilities:
+
+<<label=Bath, include=FALSE >>=
+par(mfrow=c(2,1))
+par(mar=c(2,2,2,2))
+image(Bathymetry$x,Bathymetry$y,Bathymetry$z,col=femmecol(100),
+      asp=TRUE,xlab="dg",ylab="dg")
+contour(Bathymetry$x,Bathymetry$y,Bathymetry$z,asp=TRUE,add=TRUE)
+
+# remove land and only contours.
+zz     <- Bathymetry$z
+zz[zz>0]<-0
+
+contour(Bathymetry$x,Bathymetry$y,zz,asp=TRUE)
+par(mfrow=c(1,1))
+par(mar=c(5.1,4.1,4.1,2.1))
+@
+
+\setkeys{Gin}{width=1\textwidth}
+\begin{figure}
+\centering
+<<label=figbat,fig=TRUE,echo=FALSE>>=
+<<Bath>>
+@
+\caption{Bathymetry and hypsometry of the world's ocean.}
+\label{fig:bat}
+\end{figure}
+
+\subsection{SCOC}
+
+This literature dataset, as compiled by \citep{Andersson04} contains
+584 measurements of sediment community oxygen consumption rates, as a function of water depth,
+and performed in deep-water sediments, either by in situ incubations or via modelling of oxygen microprofiles.
+
+These SCOC values are good estimates of organic matter deposition to the ocean floor.
+It is used to demonstrate the order-of-magnitude of deposition flux with water depth.
+
+A log-log regression with water depth explains the data quite well.
+
+<<label=SCOC,include=FALSE>>=
+plot(SCOC[,1],SCOC[,2],log="xy",xlab="water depth, m",ylab="" ,
+     main="SCOC, mmol O2/m2/d",pch=16,xaxt="n",yaxt="n",cex.main=1)
+
+axis(1,at=c(0.5,5,50,500,5000),labels=c("0.5","5","50","500","5000"))
+axis(2,at=c(0.1,1,10,100),labels=c("0.1","1","10","100"))
+
+ll <- lm(log(SCOC[,2])~ log(SCOC[,1]))
+rr <- summary(ll)$r.squared
+A  <- exp(coef(ll)[1])
+B  <- (coef(ll)[2])
+curve(A*x^B,add=TRUE,lwd=2)
+AA <- round(A*100)/100
+BB <- round(B*100)/100
+expr <- substitute(y==A*x^B,list(A=AA,B=BB))
+text(1,.1,expr,adj=0)
+expr2 <- substitute(r^2==rr,list(rr=round(rr*100)/100))
+text(1,0.04,expr2, adj=0)
+@
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}
+\centering
+<<label=figscoc,fig=TRUE,echo=FALSE>>=
+<<SCOC>>
+@
+\caption{Sediment community oxygen consumption rate as a function of water depth}
+\label{fig:scoc}
+\end{figure}
+
+\subsection{Zoogrowth}
+
+This literature dataset, as compiled by \citep{Hansen97} contains 84 measurements
+of maximal growth rates as a function of organism volume and temperature for various species of zooplankton.
+The maximal growth rates were obtained from laboratory experiments.
+
+It is used to demonstrate \R's graphical capabilities.
+
+<<label=Zoo,include=FALSE>>=
+plot(Zoogrowth$Volume,Zoogrowth$Mumax,log="xy",
+      xlab="zooplankton volume, micrometer ^ 3",
+      ylab="maximal growth rate, /hr",main="Zoogrowth",cex=2,
+      pch=(15:20)[Zoogrowth$Group],col=(1:6)[Zoogrowth$Group])
+legend("topright",legend=levels(Zoogrowth$Group),col=1:6,pch=15:20)
+
+ll <- lm(log(Zoogrowth[,2])~ log(Zoogrowth[,1]))
+rr <- summary(ll)$r.squared
+A  <- exp(coef(ll)[1])
+B  <- (coef(ll)[2])
+curve(A*x^B,add=TRUE,lwd=2)
+AA <- round(A*100)/100
+BB <- round(B*100)/100
+expr <- substitute(y==A*x^B,list(A=AA,B=BB))
+text(100,.0035,expr,adj=0)
+expr2 <- substitute(r^2==rr,list(rr=round(rr*100)/100))
+text(100,0.002,expr2, adj=0)
+@
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}
+\centering
+<<label=figZoo,fig=TRUE,echo=FALSE>>=
+<<Zoo>>
+@
+\caption{maximal growth rates of zooplankton as a function of body volume}
+\label{fig:Zoo}
+\end{figure}
+
+\subsection{Nemaspec}
+
+Dataset of \citep{Soetaert91} with nematode species densities in Mediterranean deep-sea sediments, at depths ranging from 160 m to 1220 m.
+
+The densities are expressed in individuals per 10 cm2.
+
+Nematodes are small free-living worms (<1mm long), generally very abundant in all aquatic sediments.
+
+This data set is used in the lecture notes, to estimate diversity indices.
+
+As an example here, we use it to draw species-dominance curves.
+
+<<>>=
+head(Nemaspec)
+# select densities of species present in M160b
+st160b<-data.frame(Nemaspec$SPECIES,dens=Nemaspec$M160b)
+st160b<-st160b[st160b$dens!=0,]
+@
+
+<<label=Nema,include=FALSE>>=
+plot(cumsum(rev(sort(st160b$dens)/sum(st160b$dens))),main="dominance curve",
+     xlab="species rank",ylab="cum freq")
+@
+
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=figNem,fig=TRUE,echo=FALSE>>=
+<<Nema>>
+@
+\caption{Species dominance curves for a sediment at 160 m depth in the Mediterranean Sea}
+\label{fig:Nema}
+\end{figure}
+
+\section{constants}
+\subsection{AtomicWeight}
+<<>>=
+AtomicWeight
+AtomicWeight$H
+(W_H2O<- with (AtomicWeight, 2*H + O))
+@
+
+\subsection{Constants}
+<<>>=
+data.frame(cbind(acronym=names(Constants),
+              matrix(ncol=3,byrow=TRUE,data=unlist(Constants),
+              dimnames=list(NULL,c("value","units","description")))))
+
+@
+\section{functions}
+\subsection{coriolis}
+Estimates the coriolis factor, f, units $sec^{-1}$ according to the formula:
+f=2*omega*sin(lat), where omega=7.292e-5 radians/sec
+
+<<label=cor,include=FALSE>>=
+plot(-90:90,coriolis(-90:90),xlab="latitude, dg North",
+                 ylab= "/s" , main ="coriolis factor",type="l",lwd=2)
+@
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=figcor,fig=TRUE,echo=FALSE>>=
+<<cor>>
+@
+\caption{The coriolis function}
+\label{fig:cor}
+\end{figure}
+\subsection{heat capacity}
+Estimates the heat capacity of seawater, using the UNESCO 1983 polynomial \citep{Fofonoff83}
+<<>>=
+cp(S=40,T=1:20)
+@
+\subsection{molecular diffusion coefficients}
+Calculates molecular and ionic diffusion coefficients (cm2/hour), for several species at given salinity (S) temperature (T) and pressure (P).
+
+Based on the code "CANDI" by Bernie Boudreau \citep{Boudreau96}.
+<<>>=
+diffcoeff(S=15,T=15)*24  # cm2/day
+diffcoeff(T=10)$O2
+difftemp <- diffcoeff(T=0:30)[,1:13]
+diffsal <- diffcoeff(S=0:35)[,1:13]
+@
+<<label=diff,include=FALSE>>=
+matplot(0:30,difftemp,xlab="temperature",ylab="cm2/hour",
+        main="Molecular/ionic diffusion",type="l")
+legend("topleft",ncol=2,cex=0.8,title="mean",col=1:13,lty=1:13,
+        legend=cbind(names(difftemp),format(colMeans(difftemp),digits=4)))
+@
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}
+\centering
+<<label=figdif,fig=TRUE,echo=FALSE>>=
+<<diff>>
+@
+\caption{molecular diffusion coefficients as a function of temperature}
+\label{fig:diff}
+\end{figure}
+\subsection{molecular diffusion coefficients}
+Calculates the shear viscosity of water, in centipoise. Valid for 0<T<30 and 0<S<36.
+
+Based on the code "CANDI" by Bernie Boudreau \citep{Boudreau96}.
+<<label=visc,include=FALSE>>=
+plot(0:30,viscosity(S=35,T=0:30,P=1),xlab="temperature",ylab="centipoise",
+       main="shear viscosity of water",type="l")
+  lines(0:30,viscosity(S=0,T=0:30,P=1),col="red")
+  lines(0:30,viscosity(S=35,T=0:30,P=100),col="blue")
+  legend("topright",col=c("black","red","blue"),lty=1,
+        legend=c("S=35,P=1","S=0,P=1","S=35,P=100"))
+@
+@
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}
+\centering
+<<label=figshear,fig=TRUE,echo=FALSE>>=
+<<visc>>
+@
+\caption{shear viscosity of water as a function of temperature}
+\label{fig:diff}
+\end{figure}
+\subsection{Concentration of conservative species in seawater}
+<<>>=
+salconc(S=seq(0,35,by=5))
+@
+\subsection{Saturated concentration of O2, N2 and Ar}
+<<>>=
+satconc(S=35,T=seq(0,20,by=5))
+@
+\section{conversions}
+\subsection{gram, mol, liter conversions}
+gram to moles
+<<>>=
+g2mol("CO3")
+g2mol("hCO3")
+g2mol("H")
+@
+liter to moles
+<<>>=
+l2mol(x=8,a=1.382,b=0.03186,T=0)*1000
+l2mol(x=1:6)
+@
+molar volume of an ideal gas
+<<>>=
+mol.vol()
+mol.vol(T=1:10)
+@
+molecular weight of a chemical species
+<<>>=
+mol.weight("CO3")
+mol.weight("HCO3")
+mol.weight("H")
+@
+\subsection{salinity and chlorinity}
+<<>>=
+sal2cl(S=35)
+@
+\section{finally}
+This vignette is mainly a Sweave \citep{Leisch02} translation of part of the \m help files.
+
+\clearpage
+\bibliography{vignettes}
+
+\end{document}
