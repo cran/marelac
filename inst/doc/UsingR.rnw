@@ -1637,8 +1637,8 @@ We restrict the region of the pH root in between 0 and 12 (which is more than la
 we set the tolerance (tol) to a very small number to increase precision.
 \begin{verbatim}
 require(seacarb)
-kc1 <- K1(S=0,T=20,p=0)    # Carbonate k1
-kc2 <- K2(S=0,T=20,p=0)    # Carbonate k2
+kc1 <- K1(S=0,T=20,P=0)    # Carbonate k1
+kc2 <- K2(S=0,T=20,P=0)    # Carbonate k2
 
 pHfunction <- function(pH, kc1,kc2, DIC, Alkalinity )
 {
@@ -1652,8 +1652,8 @@ pHfunction <- function(pH, kc1,kc2, DIC, Alkalinity )
 \end{verbatim}
 <<echo=FALSE>>=
 require(seacarb)
-kc1 <- K1(S=0,T=20,p=0)    # Carbonate k1
-kc2 <- K2(S=0,T=20,p=0)    # Carbonate k2
+kc1 <- K1(S=0,T=20,P=0)    # Carbonate k1
+kc2 <- K2(S=0,T=20,P=0)    # Carbonate k2
 
 pHfunction <- function(pH, kc1,kc2, DIC, Alkalinity )
 {
