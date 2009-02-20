@@ -11,7 +11,7 @@ R-package marelac has been designed as a tool for use by scientists working in t
 lacustrine sciences.
 
 It contains:
-
+\itemize{
 \item data sets. These are mainly used in the lecture notes "Using R for scientific computing", written
 as an introduction to R for students that follow our course in ecological modelling.
 
@@ -20,7 +20,7 @@ as an introduction to R for students that follow our course in ecological modell
 \item conversion factors, e.g. from salinity to chlorinity, from mol to gram, etc..
 
 \item functions, e.g. to estimate concentrations of conservative substances as a function of salinity, ...
-
+}
 }
 \details{
   \tabular{ll}{

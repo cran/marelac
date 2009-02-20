@@ -6,10 +6,13 @@
 the world at 1 dg intervals.
 }
 \usage{Bathymetry}
-\format{a list with the bathymetry (depth) and hypsometry (altitude) of the world. It contains:
+\format{a list with the bathymetry (depth) and hypsometry (altitude) of
+  the world. It contains:
+  \itemize{
 \item x, the latitude
 \item y, the longitude
 \item z, the height (m)
+}
 }
 \author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
 \examples{

@@ -11,12 +11,14 @@ of model parameters (i.c. maximal growth) via allometric relations, i.e. by
 performing log-log regression of organism rates versus size.}
 \usage{Zoogrowth}
 \format{a dataframe with 84 rows, and with following columns:
+  \itemize{
 \item Volume, the volume in [um 3].
 \item Mumax, the maximal growht rate, [/hour]
 \item Species, the name of reared zooplankton species
 \item Temp, the rearing temperature, [dg C]
 \item Group, the systematic group to which the organism belongs, one of Nanoflagellate,
-Dinoflagellate, Ciliate, Rotifer, Meroplankton, Copepod}
+Dinoflagellate, Ciliate, Rotifer, Meroplankton, Copepod
+}}
 \author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
 \examples{
 plot(Zoogrowth$Volume,Zoogrowth$Mumax,log="xy",
