@@ -16,30 +16,42 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \newcommand{\m}{\textbf{\textsf{marelac }}}
 \newcommand{\R}{\proglang{R}}
-\title{\proglang{R}-package \m: utilities for the marine and lacustrine sciences }
+\title{
+  \m: Tools for Aquatic Sciences
+}
 \Plaintitle{marelac}
 
-\Keywords{marine, lacustrine, science, datasets, constants, conversion,
-  \proglang{R}}
+\Keywords{
+  marine, riverine, estuarine, lacustrine, coastal science, utilities,
+  constants, \proglang{R}
+}
 
-\Plainkeywords{marine, lacustrine, science, datasets, constants, conversion, R}
+\Plainkeywords{
+  marine, riverine, estuarine, lacustrine, coastal science, utilities,
+  constants, R
+}
 
 
 \author{Karline Soetaert\\
 NIOO-CEME\\
 The Netherlands
 \And
+Thomas Petzoldt\\
+Technische Universit\"at Dresden\\
+Germany
+\And
 Filip Meysman\\
-VUB\\
-Belgium}
+NIOO-CEME\\
+The Netherlands
+}
 
-\Plainauthor{Karline Soetaert and Filip Meysman}
+\Plainauthor{Karline Soetaert, Thomas Petzoldt and Filip Meysman}
 
-\Abstract{ \R package \m \citep{marelac} contains datasets, chemical and physical constants
-and functions, routines for unit conversion, and other utilities useful for marine (oceans, seas) and lacustrine (lakes) sciences.
-
-The package also contains lecture notes for novice R-users.
-
+\Abstract{
+  \R package \m \citep{marelac} contains chemical and physical
+  constants and functions, datasets, routines for unit conversion, and
+  other utilities useful for MArine, Riverine, Estuarine, LAcustrine
+  and Coastal sciences.
 }
 
 %% The address of (at least) one author should be given
@@ -50,20 +62,28 @@ The package also contains lecture notes for novice R-users.
   Netherlands Institute of Ecology (NIOO)\\
   4401 NT Yerseke, Netherlands\\
   E-mail: \email{k.soetaert@nioo.knaw.nl}\\
-  URL: \url{http://www.nioo.knaw.nl/ppages/ksoetaert}\\
-\\
-Filip Meysman\\
-Laboratory of Analytical and Environmental Chemistry\\
-Vrije Universiteit Brussel (VUB)\\
-Pleinlaan 2\\
-1050 Brussel, Belgium.\\
-E-mail: \email{filip.meysman@vub.ac.be}
+  URL: \url{http://www.nioo.knaw.nl/users/ksoetaert}\\
+  \\
+  Thomas Petzoldt\\
+  Institut f\"ur Hydrobiologie\\
+  Technische Universit\"at Dresden\\
+  01062 Dresden, Germany\\
+  E-mail: \email{thomas.petzoldt@tu-dresden.de}\\
+  URL: \url{http://tu-dresden.de/Members/thomas.petzoldt/}\\
+  \\
+  Filip Meysman\\
+  Centre for Estuarine and Marine Ecology (CEME)\\
+  Netherlands Institute of Ecology (NIOO)\\
+  4401 NT Yerseke, Netherlands\\
+  E-mail: \email{f.meysman@nioo.knaw.nl}
 }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% R/Sweave specific LaTeX commands.
 %% need no \usepackage{Sweave}
-%\VignetteIndexEntry{marine and lacustrine sciences}
+%\VignetteIndexEntry{marelac: utilities for the MArine, Riverine, Estuarine, LAcustrine and Coastal sciences}
+%\VignetteKeywords{marine, riverine, estuarine, lacustrine, coastal science, utilities, constants}
+%\VignettePackage{marelac}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Begin of the document
 \begin{document}
@@ -73,199 +93,178 @@ E-mail: \email{filip.meysman@vub.ac.be}
 <<preliminaries,echo=FALSE,results=hide>>=
 library("marelac")
 options(prompt = "> ")
+options(width=75)
 @
 
 \maketitle
 
 \section{Introduction}
-Whereas \R is predominantly used as a statistical package, it is also very well
-suited for scientific computing, e.g. \citep{Soetaert08}.
 
-\R-package \m has been designed as a tool for use by scientists working in the marine and
-lacustrine sciences.
+\R-package \m has been designed as a tool for use by scientists
+working in the MArine, Riverine, Estuarine, LAcustrine and Coastal
+sciences.
 
 It contains:
+
 \begin{itemize}
-\item data sets. These are mainly used in the lecture notes "Using R for scientific computing" \citep{lecture}, written
-as an introductory course for students that follow our course in ecological modelling, taught at the universities of
-Ghent and Brussels (by Filip Meysman and myself).
-\item chemical and physical constants, e.g. atomic weights, gas constants.
-\item conversion factors, e.g. gram to mol to liter conversions.
-\item functions, e.g. to estimate concentrations of conservative substances as a function of salinity, ...
+\item chemical and physical constants, datasets, e.g. atomic weights, gas
+  constants, the earths bathymetry.
+\item conversion factors, e.g. gram to mol to liter conversions;
+  conversions between different barometric units, temperature units,
+  salinity units.
+\item physical functions, e.g. to estimate concentrations of
+  conservative substances as a function of salinity, gas transfer
+  coefficients, diffusion coefficients, estimating the Coriolis force,
+  gravity ...
+\item the thermophysical properties of the seawater, as from the
+  UNESCO polynomial \citep{UNESCO} or as from the more recent
+  derivation based on a Gibbs function \citep{Feistel08,McDougall}.
 \end{itemize}
 
+\section{Constants and datasets}
 
-\section{data sets}
-To date, there are  3 datasets
-\subsection{Bathymetry}
+\subsection{Physical constants}
 
-This dataset, as used by \citep{Andersson04} contains elevations, in metres of the world at 1 dg intervals.
-Positive values are altitudes, negative values are ocean depths.
+Dataset \code{Constants} contains commonly used physical and chemical
+constants, as in \citet{Mohr05}:
 
-Used to demonstrate \R's image and contouring capabilities:
-
-<<label=Bath, include=FALSE >>=
-par(mfrow=c(2,1))
-par(mar=c(2,2,2,2))
-image(Bathymetry$x,Bathymetry$y,Bathymetry$z,col=femmecol(100),
-      asp=TRUE,xlab="dg",ylab="dg")
-contour(Bathymetry$x,Bathymetry$y,Bathymetry$z,asp=TRUE,add=TRUE)
-
-# remove land and only contours.
-zz     <- Bathymetry$z
-zz[zz>0]<-0
-
-contour(Bathymetry$x,Bathymetry$y,zz,asp=TRUE)
-par(mfrow=c(1,1))
-par(mar=c(5.1,4.1,4.1,2.1))
-@
-
-\setkeys{Gin}{width=1\textwidth}
-\begin{figure}
-\centering
-<<label=figbat,fig=TRUE,echo=FALSE>>=
-<<Bath>>
-@
-\caption{Bathymetry and hypsometry of the world's ocean.}
-\label{fig:bat}
-\end{figure}
-
-\subsection{SCOC}
-
-This literature dataset, as compiled by \citep{Andersson04} contains
-584 measurements of sediment community oxygen consumption rates, as a function of water depth,
-and performed in deep-water sediments, either by in situ incubations or via modelling of oxygen microprofiles.
-
-These SCOC values are good estimates of organic matter deposition to the ocean floor.
-It is used to demonstrate the order-of-magnitude of deposition flux with water depth.
-
-A log-log regression with water depth explains the data quite well.
-
-<<label=SCOC,include=FALSE>>=
-plot(SCOC[,1],SCOC[,2],log="xy",xlab="water depth, m",ylab="" ,
-     main="SCOC, mmol O2/m2/d",pch=16,xaxt="n",yaxt="n",cex.main=1)
-
-axis(1,at=c(0.5,5,50,500,5000),labels=c("0.5","5","50","500","5000"))
-axis(2,at=c(0.1,1,10,100),labels=c("0.1","1","10","100"))
-
-ll <- lm(log(SCOC[,2])~ log(SCOC[,1]))
-rr <- summary(ll)$r.squared
-A  <- exp(coef(ll)[1])
-B  <- (coef(ll)[2])
-curve(A*x^B,add=TRUE,lwd=2)
-AA <- round(A*100)/100
-BB <- round(B*100)/100
-expr <- substitute(y==A*x^B,list(A=AA,B=BB))
-text(1,.1,expr,adj=0)
-expr2 <- substitute(r^2==rr,list(rr=round(rr*100)/100))
-text(1,0.04,expr2, adj=0)
-@
-
-\setkeys{Gin}{width=0.8\textwidth}
-\begin{figure}
-\centering
-<<label=figscoc,fig=TRUE,echo=FALSE>>=
-<<SCOC>>
-@
-\caption{Sediment community oxygen consumption rate as a function of water depth}
-\label{fig:scoc}
-\end{figure}
-
-\subsection{Zoogrowth}
-
-This literature dataset, as compiled by \citep{Hansen97} contains 84 measurements
-of maximal growth rates as a function of organism volume and temperature for various species of zooplankton.
-The maximal growth rates were obtained from laboratory experiments.
-
-It is used to demonstrate \R's graphical capabilities.
-
-<<label=Zoo,include=FALSE>>=
-plot(Zoogrowth$Volume,Zoogrowth$Mumax,log="xy",
-      xlab="zooplankton volume, micrometer ^ 3",
-      ylab="maximal growth rate, /hr",main="Zoogrowth",cex=2,
-      pch=(15:20)[Zoogrowth$Group],col=(1:6)[Zoogrowth$Group])
-legend("topright",legend=levels(Zoogrowth$Group),col=1:6,pch=15:20)
-
-ll <- lm(log(Zoogrowth[,2])~ log(Zoogrowth[,1]))
-rr <- summary(ll)$r.squared
-A  <- exp(coef(ll)[1])
-B  <- (coef(ll)[2])
-curve(A*x^B,add=TRUE,lwd=2)
-AA <- round(A*100)/100
-BB <- round(B*100)/100
-expr <- substitute(y==A*x^B,list(A=AA,B=BB))
-text(100,.0035,expr,adj=0)
-expr2 <- substitute(r^2==rr,list(rr=round(rr*100)/100))
-text(100,0.002,expr2, adj=0)
-@
-
-\setkeys{Gin}{width=0.8\textwidth}
-\begin{figure}
-\centering
-<<label=figZoo,fig=TRUE,echo=FALSE>>=
-<<Zoo>>
-@
-\caption{maximal growth rates of zooplankton as a function of body volume}
-\label{fig:Zoo}
-\end{figure}
-
-\subsection{Nemaspec}
-
-Dataset of \citep{Soetaert91} with nematode species densities in Mediterranean deep-sea sediments, at depths ranging from 160 m to 1220 m.
-
-The densities are expressed in individuals per 10 cm2.
-
-Nematodes are small free-living worms (<1mm long), generally very abundant in all aquatic sediments.
-
-This data set is used in the lecture notes, to estimate diversity indices.
-
-As an example here, we use it to draw species-dominance curves.
-
-<<>>=
-head(Nemaspec)
-# select densities of species present in M160b
-st160b<-data.frame(Nemaspec$SPECIES,dens=Nemaspec$M160b)
-st160b<-st160b[st160b$dens!=0,]
-@
-
-<<label=Nema,include=FALSE>>=
-plot(cumsum(rev(sort(st160b$dens)/sum(st160b$dens))),main="dominance curve",
-     xlab="species rank",ylab="cum freq")
-@
-
-\setkeys{Gin}{width=0.6\textwidth}
-\begin{figure}
-\centering
-<<label=figNem,fig=TRUE,echo=FALSE>>=
-<<Nema>>
-@
-\caption{Species dominance curves for a sediment at 160 m depth in the Mediterranean Sea}
-\label{fig:Nema}
-\end{figure}
-
-\section{constants}
-\subsection{AtomicWeight}
-<<>>=
-AtomicWeight
-AtomicWeight$H
-(W_H2O<- with (AtomicWeight, 2*H + O))
-@
-
-\subsection{Constants}
 <<>>=
 data.frame(cbind(acronym=names(Constants),
-              matrix(ncol=3,byrow=TRUE,data=unlist(Constants),
-              dimnames=list(NULL,c("value","units","description")))))
+             matrix(ncol=3,byrow=TRUE,data=unlist(Constants),
+             dimnames=list(NULL,c("value","units","description")))))
 
 @
-\section{functions}
-\subsection{coriolis}
-Estimates the coriolis factor, f, units $sec^{-1}$ according to the formula:
-f=2*omega*sin(lat), where omega=7.292e-5 radians/sec
 
+\subsection{Ocean characteristics}
+
+Dataset \code{Oceans} contains surfaces and volumes of the world oceans
+as in \citet{Sarmiento06}:
+
+<<>>=
+data.frame(cbind(acronym=names(Oceans),
+             matrix(ncol=3,byrow=TRUE,data=unlist(Oceans),
+             dimnames=list(NULL,c("value","units","description")))))
+@
+
+\subsection{World bathymetric data}
+
+Data set \code{Bathymetry} from the \pkg{marelac} package can be used
+to generate the bathymetry (and hypsometry) of the world oceans (and
+land) (Fig.\ref{fig:f1}):
+
+<<label=bat,include=FALSE>>=
+require(marelac)
+image(Bathymetry$x,Bathymetry$y,Bathymetry$z,col=femmecol(100),
+      asp=TRUE,xlab="",ylab="")
+contour(Bathymetry$x,Bathymetry$y,Bathymetry$z,add=TRUE)
+@
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}
+\begin{center}
+<<label=batfig,fig=TRUE,echo=FALSE>>=
+<<bat>>
+@
+\end{center}
+\caption{Image plot of ocean bathymetry - see text for \proglang{R}-code}
+\label{fig:f1}
+\end{figure}
+
+\subsection{Surface of 1 dg by 1 dg grid cells of the earth}
+
+Function \code{earth_surf} estimates the surface ($\rm m^2$) of the
+bathymetric grid cells of 1dg by 1dg, based on their latitude.
+
+As an example, we use it to estimate the surface of the earth; the true
+surface is 510072000 $\rm km^2$:
+
+<<>>=
+SURF <- outer(X=Bathymetry$x,
+               Y=Bathymetry$y,
+               FUN <- function(X,Y) earth_surf(Y,X))
+sum(SURF)
+@
+Similarly, we can estimate the surface and volume of the oceans; it should
+be $3.58e^{14}$ and $1.34e^{+18}$ respectively.
+
+<<>>=
+ sum(SURF*(Bathymetry$z<0))
+
+- sum(SURF*Bathymetry$z*(Bathymetry$z<0))
+@
+
+Combined with the dataset \code{Bathymetry}, function
+\code{earth_surf} allows to estimate the total earth surface at
+certain water depths (Fig.\ref{fig:fo}):
+
+<<>>=
+SurfDepth <- vector()
+
+dseq <- seq(-7500,-250,by=250)
+
+for (i in 2:length(dseq)) {
+  ii <- which (Bathymetry$z>dseq[i-1]&Bathymetry$z<=dseq[i])
+  SurfDepth[i-1]<-sum(SURF[ii])
+}
+@
+
+<<label=ocean,include=FALSE>>=
+plot(dseq[-1],SurfDepth, xlab="depth, m", log="y",
+     ylab = "m2", main = "Surface at ocean depths")
+@
+
+\setkeys{Gin}{width=0.4\textwidth}
+\begin{figure}
+\begin{center}
+<<label=ocean,fig=TRUE,echo=FALSE>>=
+<<ocean>>
+@
+\end{center}
+\caption{Earth surface at certain ocean depths - see text for \proglang{R}-code}
+\label{fig:fo}
+\end{figure}
+
+\subsection{AtomicWeight}
+
+Dataset \code{AtomicWeight} holds the atomic weight of most chemical
+elements according to the IUPAC table \citep{Wieser06}. The data set
+contains \code{NA} for elements which have no stable isotopes (except
+U, Th, Pa). The data set can be called in two
+versions. \code{AtomicWeight} shows the full table and
+\code{atomicweight} can be used for symbolic computations with the
+elements (see also \code{molweight}).
+
+<<>>=
+AtomicWeight
+AtomicWeight[8,]
+(W_H2O<- with (atomicweight, 2 * H + O))
+@
+
+\subsection{Atmospheric composition}
+
+The atmospheric composition, given in units of the moles of each gas
+to the total of moles of gas in dry air is in function \code{atmComp}:
+
+<<>>=
+atmComp("O2")
+atmComp()
+sum(atmComp())    #!
+@
+
+
+\section{Physical functions}
+
+\subsection{Coriolis}
+
+Function \code{coriolis} estimates the Coriolis factor, f, units
+$sec^{-1}$ according to the formula: $f=2*\omega*\sin(lat)$, where
+$\omega=7.292e^{-5} \rm radians\, sec^{-1}$.
+
+The following R-script plots the coriolis factor as a function of latitude
+(Fig.\ref{fig:cor}):
 <<label=cor,include=FALSE>>=
 plot(-90:90,coriolis(-90:90),xlab="latitude, dg North",
-                 ylab= "/s" , main ="coriolis factor",type="l",lwd=2)
+                 ylab= "/s" , main ="Coriolis factor",type="l",lwd=2)
 @
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}
@@ -273,99 +272,602 @@ plot(-90:90,coriolis(-90:90),xlab="latitude, dg North",
 <<label=figcor,fig=TRUE,echo=FALSE>>=
 <<cor>>
 @
-\caption{The coriolis function}
+\caption{The Coriolis function}
 \label{fig:cor}
 \end{figure}
-\subsection{heat capacity}
-Estimates the heat capacity of seawater, using the UNESCO 1983 polynomial \citep{Fofonoff83}
-<<>>=
-cp(S=40,T=1:20)
-@
-\subsection{molecular diffusion coefficients}
-Calculates molecular and ionic diffusion coefficients (cm2/hour), for several species at given salinity (S) temperature (T) and pressure (P).
 
-Based on the code "CANDI" by Bernie Boudreau \citep{Boudreau96}.
+\subsection{Molecular diffusion coefficients}
+
+In function \code{diffcoeff} the molecular and ionic diffusion
+coefficients ($\rm m^2 s^{-1}$), for several species at given salinity (S)
+temperature (t) and pressure (P) is estimated. The implementation is
+based on Chapter 4 in \citep{Boudreau97}.
+
 <<>>=
-diffcoeff(S=15,T=15)*24  # cm2/day
-diffcoeff(T=10)$O2
-difftemp <- diffcoeff(T=0:30)[,1:13]
-diffsal <- diffcoeff(S=0:35)[,1:13]
+diffcoeff(S=15,t=15)*24*3600*1e4  # cm2/day
+diffcoeff(t=10)$O2
 @
+Values of the diffusion coefficients for a temperature range of 0 to 30 and
+for the 13 first species is in (Fig.\ref{fig:diff}):
+<<>>=
+difftemp <- diffcoeff(t=0:30)[,1:13]
+@
+
 <<label=diff,include=FALSE>>=
-matplot(0:30,difftemp,xlab="temperature",ylab="cm2/hour",
+matplot(0:30,difftemp,xlab="temperature",ylab=" m2/sec",
         main="Molecular/ionic diffusion",type="l")
 legend("topleft",ncol=2,cex=0.8,title="mean",col=1:13,lty=1:13,
         legend=cbind(names(difftemp),format(colMeans(difftemp),digits=4)))
 @
-\setkeys{Gin}{width=0.8\textwidth}
+
+\setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}
 \centering
 <<label=figdif,fig=TRUE,echo=FALSE>>=
 <<diff>>
 @
-\caption{molecular diffusion coefficients as a function of temperature}
+\caption{Molecular diffusion coefficients as a function of temperature}
 \label{fig:diff}
 \end{figure}
-\subsection{molecular diffusion coefficients}
-Calculates the shear viscosity of water, in centipoise. Valid for 0<T<30 and 0<S<36.
 
-Based on the code "CANDI" by Bernie Boudreau \citep{Boudreau96}.
+\subsection{Shear viscosity of water}
+
+Function \code{viscosity} calculates the shear viscosity of water, in
+centipoise ($\rm g m^{-1} sec^{-1}$). The formula is valid for $0 < t <
+30$ and $0 < S < 36$ (Fig.\ref{fig:vis}).
+
 <<label=visc,include=FALSE>>=
-plot(0:30,viscosity(S=35,T=0:30,P=1),xlab="temperature",ylab="centipoise",
+plot(0:30,viscosity(S=35,t=0:30,P=1),xlab="temperature",ylab="g/m/s",
        main="shear viscosity of water",type="l")
-  lines(0:30,viscosity(S=0,T=0:30,P=1),col="red")
-  lines(0:30,viscosity(S=35,T=0:30,P=100),col="blue")
-  legend("topright",col=c("black","red","blue"),lty=1,
+lines(0:30,viscosity(S=0,t=0:30,P=1),col="red")
+lines(0:30,viscosity(S=35,t=0:30,P=100),col="blue")
+legend("topright",col=c("black","red","blue"),lty=1,
         legend=c("S=35,P=1","S=0,P=1","S=35,P=100"))
 @
-@
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}
 \centering
 <<label=figshear,fig=TRUE,echo=FALSE>>=
 <<visc>>
 @
-\caption{shear viscosity of water as a function of temperature}
-\label{fig:diff}
+\caption{Shear viscosity of water as a function of temperature}
+\label{fig:vis}
 \end{figure}
+
+\section{Dissolved gasses}
+
+\subsection{Saturated oxygen concentrations}
+
+\code{gas_O2sat} estimates the saturated concentration of oxygen in
+$\rm mg L^{-1}$. Method APHA \citep{APHA92} is the standard formula in
+Limnology, the method after \citet{Weiss70} the traditional formula
+used in marine sciences.
+
+<<>>=
+gas_O2sat(t = 20)
+t <- seq(0, 30, 0.1)
+@
+
+Conversion to $\rm mmol~m^{-3}$ can be done as follows:
+
+<<>>=
+gas_O2sat(S=35, t=20)*1000/molweight("O2")
+@
+The effect of salinity on saturated concentration is in (Fig.\ref{fig:o2sat}).
+<<label=o2sat,include=FALSE>>=
+  plot(t, gas_O2sat(t = t), type = "l", ylim = c(0, 15), lwd=2,
+       main="Oxygen saturation", ylab = "mg/l", xlab="temperature")
+  lines(t, gas_O2sat(S = 0, t = t, method = "Weiss"), col = "green",
+        lwd = 2, lty = "dashed")
+  lines(t, gas_O2sat(S = 35, t = t, method = "Weiss"), col = "red", lwd = 2)
+  legend("topright",c("S=35","S=0"),col=c("red","green"), lty=c(1,2), lwd=2)
+@
+
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=figo2sat,fig=TRUE,echo=FALSE>>=
+<<o2sat>>
+@
+\caption{Oxygen saturated concentration as a function of temperature, and
+  for different salinities}
+\label{fig:o2sat}
+\end{figure}
+
+
+\subsection{Solubilities and saturated concentrations}
+
+More solubilities and saturated concentrations (in $\rm mmol m^{-3}$) are in
+functions \code{gas_solubility} and \code{gas_satconc}.
+
+<<>>=
+gas_satconc(species="O2")
+Temp<-seq(from=0,to=30,by=0.1)
+Sal <- seq(from=0,to=35,by=0.1)
+@
+We plot the saturated concentrations for a selection of species as a
+function of temperature and salinity (Fig.\ref{fig:solub}):
+<<label=solub,include=FALSE>>=
+#
+mf  <-par(mfrow=c(2,2))
+#
+gs  <-gas_solubility(t=Temp)
+species   <- c("CCl4","CO2","N2O","Rn","CCl2F2")
+matplot(Temp,gs[,species],type="l",lty=1,lwd=2,xlab="temperature",
+     ylab="mmol/m3",main="solubility (S=35)")
+legend("topright",col=1:5,lwd=2,legend=species)
+#
+species2 <- c("Kr","CH4","Ar","O2","N2","Ne")
+matplot(Temp,gs[,species2],type="l",lty=1,lwd=2,xlab="temperature",
+     ylab="mmol/m3",main="solubility (S=35)")
+legend("topright",col=1:6,lwd=2,legend=species2)
+#
+
+species <- c("N2","CO2","O2","CH4","N2O")
+gsat  <-gas_satconc(t=Temp,species=species)
+matplot(Temp,gsat,type="l",xlab="temperature",log="y", lty=1,
+     ylab="mmol/m3",main="Saturated conc (S=35)",lwd=2)
+legend("right",col=1:5,lwd=2,legend=species)
+#
+gsat  <-gas_satconc(S=Sal,species=species)
+matplot(Sal,gsat,type="l",xlab="salinity",log="y", lty=1,
+     ylab="mmol/m3",main="Saturated conc (T=20)",lwd=2)
+legend("right",col=1:5,lwd=2,legend=species)
+#
+par("mfrow"=mf)
+@
+
+\setkeys{Gin}{width=0.8\textwidth}
+\begin{figure}
+\centering
+<<label=figsolub,fig=TRUE,echo=FALSE>>=
+<<solub>>
+@
+\caption{Saturated concentrations and solubility as a function of temperature
+  and salinity, and for different species}
+\label{fig:solub}
+\end{figure}
+
+\subsection{Partial pressure of water vapor}
+
+Function \code{vapor} estimates the partial pessure of water vapor, divided by
+the atmospheric pressure (Fig.\ref{fig:vapor}).
+
+<<label=vapor,include=FALSE>>=
+plot(0:30, vapor(t = 0:30), xlab = "Temperature, dgC", ylab = "pH2O/P",
+     type ="l")
+@
+
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=figvapor,fig=TRUE,echo=FALSE>>=
+<<vapor>>
+@
+\caption{Partial pressure of water in saturated air as a function of
+  temperature}
+\label{fig:vapor}
+\end{figure}
+
+\subsection{Schmidt number and gas transfer velocity}
+
+The Schmidt number of a gas (\code{gas_schmidt}) is an essential
+quantity in the gas transfer velocity calculation
+(\code{gas_transfer}). The latter also depends on wind velocity, as
+measured 10 metres above sea level ($u_{10}$)) (Fig.\ref{fig:transfer}).
+
+<<>>=
+gas_schmidt(species="CO2",t=20)
+
+useq <- 0:15
+@
+
+<<label=transfer,include=FALSE>>=
+plot(useq,gas_transfer(u10=useq,species="O2"),type="l",lwd=2,xlab="u10,m/s",
+     ylab="m/s", main="O2 gas transfer velocity",ylim=c(0,3e-4))
+lines(useq,gas_transfer(u10=useq,species="O2",method="Nightingale"),lwd=2,lty=2)
+lines(useq,gas_transfer(u10=useq,species="O2",method="Wanninkhof1"),lwd=2,lty=3)
+lines(useq,gas_transfer(u10=useq,species="O2",method="Wanninkhof2"),lwd=2,lty=4)
+
+legend("topleft",lty=1:4,lwd=2,legend=c("Liss and Merlivat 1986",
+"Nightingale et al. 2000","Wanninkhof 1992","Wanninkhof and McGills 1999"))
+@
+
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=figtransfer,fig=TRUE,echo=FALSE>>=
+<<transfer>>
+@
+\caption{Oxygen gas transfer velocity for seawater, as a function of wind speed}
+\label{fig:transfer}
+\end{figure}
+
+\section{Seawater properties}
+
 \subsection{Concentration of conservative species in seawater}
+
+Borate, calcite, sulphate and fluoride concentrations can be estimated
+as a function of the seawater salinity:
+
 <<>>=
-salconc(S=seq(0,35,by=5))
+sw_conserv(S=seq(0,35,by=5))
 @
-\subsection{Saturated concentration of O2, N2 and Ar}
+
+\subsection{Two salinity scales}
+
+\citet{Millero08} and \citet{McDougall09} provide a function to derive
+absolute salinity (expressed in $\rm g~kg^{-1}$) from measures of
+practical salinity. Absolute salinity is to be used as the
+concentration variable entering the thermodynamic functions of
+seawater (see next section).
+
+The conversion between salinity scales is done with functions:
+
+\begin{itemize}
+\item \code{convert_AStoPS} from absolute to practical salinity and
+\item \code{convert_PStoAS} from practical to absolute salinity
+\end{itemize}
+
+For example:
+
 <<>>=
-satconc(S=35,T=seq(0,20,by=5))
+convert_AStoPS(S=35)
+convert_PStoAS(S=35)
 @
-\section{conversions}
-\subsection{gram, mol, liter conversions}
-gram to moles
+
+These functions have as extra arguments the gauge pressure (\code{p}),
+latitude (\code{lat}), longitude (\code{lon}), and -optional- the
+dissolved Si concentration (\code{DSi}) and the ocean (\code{Ocean}).
+
+When one of these arguments are provided, they also correct for
+inconsistencies due to local composition anomalies.
+
+When \code{DSi} is not given, the correction makes use of a conversion
+table that estimates the salinity variations as a function of
+present-day local seawater composition. The conversion in R uses the
+FORTRAN code developed by D. Jackett
+(\url{http://www.marine.csiro.au/\~jackett/TEOS-10/}).
+
+The correction factors are in a data set called \code{sw_sfac}, a list
+with the properties used in the conversion functions.
+
+Below we first convert from practical to absolute salinity, for
+different longitudes, and then plot the correction factors as a
+function of latitude and longitude and at the seawater surface,
+i.e. for \code{p=0} (Fig.\ref{fig:sfac}).\footnote{Before plotting, the negative numbers
+  in the salinity anomaly table \code{sw\_sfac} are converted to
+  \code{NA} (not available).  In the data set, numbers not available
+  are denoted with \code{-99}.}.
+
 <<>>=
-g2mol("CO3")
-g2mol("hCO3")
-g2mol("H")
+convert_PStoAS(S=35,lat=-10,lon=0)
+convert_PStoAS(S=35,lat=0,lon=0)
+convert_PStoAS(S=35,lat=10,lon=0)
+convert_PStoAS(S=35,lat=-10,lon=0)
+
+convert_PStoAS(S=35,lat=-10, DSi=1:10, Ocean="Pacific")
+
+dsal <- t(sw_sfac$del_sa[1,,])
+dsal [dsal < -90]<-NA
 @
-liter to moles
+<<label=sfac,include=FALSE>>=
+image(sw_sfac$longs, sw_sfac$lats, dsal, col=femmecol(100),
+      asp=TRUE, xlab="dg", ylab="dg",
+      main="salinity conversion - p = 0 bar")
+contour(sw_sfac$longs, sw_sfac$lats, dsal, asp=TRUE, add=TRUE)
+@
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=sfac,fig=TRUE,echo=FALSE>>=
+<<sfac>>
+@
+\caption{Salinity anomaly to convert from practical to absolute salinity
+and vice versa}
+\label{fig:sfac}
+\end{figure}
+Finally, the correction factors are plotted versus depth, at four latitudinal
+cross-sections (Fig.\ref{fig:sfac2}):
+<<label=sfac2,include=FALSE>>=
+ii <- c(6,21,24,43)
+par(mfrow=c(2,2))
+for ( i in ii)
+{
+dsal <- t(sw_sfac$del_sa[,i,])
+dsal [dsal < -90]<-0
+image(sw_sfac$longs, sw_sfac$p, dsal, col=c("black",femmecol(100)),
+      xlab="longitude, dg", ylab="depth, m", zlim=c(0,0.018),
+      main=sw_sfac$lat[i],ylim=c(6000,0))
+contour(sw_sfac$longs, sw_sfac$p, dsal, asp=TRUE, add=TRUE)
+}
+@
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=sfac2,fig=TRUE,echo=FALSE>>=
+<<sfac2>>
+@
+\caption{Salinity anomaly to convert from practical to absolute salinity
+and vice versa for several latitudinal cross-sections (negative = S hemisphere)}
+\label{fig:sfac2}
+\end{figure}
+
+
+\subsection{Thermophysical seawater properties}
+
+Package \m also implements several thermodynamic properties of
+seawater. Either one can choose the formulation based on the UNESCO
+polynomial \citep{UNESCO}, which has served the oceanographic
+community for decades, or the more recent derivation as in
+\citet{Feistel08}. In the latter case the estimates are based on three
+individual thermodynamic potentials for fluid water, for ice and for
+the saline contribution of seawater (the Helmholtz function for pure
+water, an equation of state for salt-free ice, in the form of a Gibbs
+potential function, and the saline part of the Gibbs potential).
+
+Note that the formulations from \citet{Feistel08} use the absolute
+salinity scale \citep{Millero08}, while the UNESCO polynomial uses
+practical salinity.
+
 <<>>=
-l2mol(x=8,a=1.382,b=0.03186,T=0)*1000
-l2mol(x=1:6)
+sw_cp(S=40,t=1:20)
+sw_cp(S=40,t=1:20,method="UNESCO")
 @
-molar volume of an ideal gas
+
+The precision of the calculations can be assessed by comparing them to
+some test values:
+
 <<>>=
-mol.vol()
-mol.vol(T=1:10)
+t  <-  25.5
+p  <- 1023/10  # pressure in bar
+S  <- 35.7
+sw_alpha(S,t,p)               -0.0003098378393192645
+sw_beta(S,t,p)                -0.0007257297978386655
+sw_cp(S,t,p)                  -3974.42541259729
+sw_tpot(S,t,p)                -25.2720983155409
+sw_dens(S,t,p)                -1027.95249315662
+sw_enthalpy(S,t,p)            -110776.712408975
+sw_entropy(S,t,p)             -352.81879771528
+sw_kappa(S,t,p)               -4.033862685464779e-6
+sw_kappa_t(S,t,p)             -4.104037946151349e-6
+sw_svel(S,t,p)                -1552.93372863425
 @
-molecular weight of a chemical species
+
+Below we plot all implemented thermophysical properties as a function
+of salinity and temperature (Fig.\ref{fig:sw}, \ref{fig:sw2}).
+We first define a function that makes the plots:
+
+<<label=sw,include=FALSE>>=
+plotST <- function(fun,title)
+{
+  Sal <-  seq(0,40,by=0.5)
+  Temp<- seq(-5,40,by=0.5)
+
+  Val <- outer(X=Sal,Y=Temp,FUN=function(X,Y) fun(S=X, t=Y))
+  contour(Sal,Temp,Val,xlab="Salinity",ylab="temperature",
+          main=title,nlevel=20)
+}
+
+par (mfrow=c(3,2))
+par(mar=c(4,4,3,2))
+plotST(sw_gibbs,"Gibbs function")
+plotST(sw_cp,"Heat capacity")
+plotST(sw_entropy,"Entropy")
+plotST(sw_enthalpy,"Enthalpy")
+plotST(sw_dens,"Density")
+plotST(sw_svel,"Sound velocity")
+@
+
+\setkeys{Gin}{width=0.9\textwidth}
+\begin{figure}
+\centering
+<<label=sw,fig=TRUE,echo=FALSE>>=
+<<sw>>
+@
+\caption{Seawater properties as a function of salinity and temperature -
+  see text for \proglang{R}-code}
+\label{fig:sw}
+\end{figure}
+
+<<label=sw2,include=FALSE>>=
+par (mfrow=c(3,2))
+par(mar=c(4,4,3,2))
+plotST(sw_kappa,"Isentropic compressibility")
+plotST(sw_kappa_t,"Isothermal compressibility")
+plotST(sw_alpha,"Thermal expansion coefficient")
+plotST(sw_beta,"Haline contraction coefficient")
+plotST(sw_adtgrad,"Adiabatic temperature gradient")
+par (mfrow=c(1,1))
+@
+\setkeys{Gin}{width=0.9\textwidth}
+\begin{figure}
+\centering
+<<label=sw2,fig=TRUE,echo=FALSE>>=
+<<sw2>>
+@
+\caption{Seawater properties as a function of salinity and temperature -
+  continued - see text for \proglang{R}-code}
+\label{fig:sw2}
+\end{figure}
+
+The difference between the two formulations, based on the UNESCO polynomial
+or the Gibss function is also instructive (Fig.\ref{fig:sw3}):
+<<label=sw3,include=FALSE>>=
+par (mfrow=c(2,2))
+par(mar=c(4,4,3,2))
+plotST(function(S,t) sw_dens(S,t,method="UNESCO")-sw_dens(S,t),
+  "Density UNESCO - Gibbs")
+plotST(function(S,t) sw_cp(S,t,method="UNESCO")-sw_cp(S,t),
+  "Heat capacity UNESCO - Gibbs")
+plotST(function(S,t) sw_svel(S,t,method="UNESCO")-sw_svel(S,t),
+  "Sound velocity UNESCO - Gibbs")
+par (mfrow=c(1,1))
+@
+\setkeys{Gin}{width=0.9\textwidth}
+\begin{figure}
+\centering
+<<label=sw3,fig=TRUE,echo=FALSE>>=
+<<sw3>>
+@
+\caption{Difference between two methods of calculating some seawater
+  properties as a function of salinity and temperature -
+  see text for \proglang{R}-code}
+\label{fig:sw3}
+\end{figure}
+
+
+\clearpage %% output of all the many figures before
+
+\section{Conversions}
+
+Finally, several functions are included to convert between units of
+certain properties.
+
+\subsection{Gram, mol, liter conversions}
+
+\m function \code{molweight} converts from gram to moles and vice
+versa. The function is based on a lexical parser and the IUPAC table of
+atomic weights, so it should be applicable to arbitrary chemical
+formulae:
+
 <<>>=
-mol.weight("CO3")
-mol.weight("HCO3")
-mol.weight("H")
+1/molweight("CO3")
+1/molweight("HCO3")
+1/molweight(c("C2H5OH", "CO2", "H2O"))
+
+molweight(c("SiOH4", "NaHCO3", "C6H12O6", "Ca(HCO3)2", "Pb(NO3)2", "(NH4)2SO4"))
 @
-\subsection{salinity and chlorinity}
+
+We can use that to estimate the importance of molecular weight on
+certain physical properties (Fig.\ref{fig:mw}):
+
 <<>>=
-sal2cl(S=35)
+gs <- gas_solubility()
+species <- colnames(gs)
+mw <- molweight(species)
 @
-\section{finally}
-This vignette is mainly a Sweave \citep{Leisch02} translation of part of the \m help files.
+<<label=mwgs,include=FALSE>>=
+plot(mw,gs,type="n",xlab="molecular weight", ylab="solubility", log="y")
+text(mw,gs,species)
+@
+
+\setkeys{Gin}{width=0.6\textwidth}
+\begin{figure}
+\centering
+<<label=mwgs,fig=TRUE,echo=FALSE>>=
+<<mwgs>>
+@
+\caption{Gas solubility as a function of molecular weight
+  see text for \proglang{R}-code}
+\label{fig:mw}
+\end{figure}
+
+%% ThPe: is this correct this way:
+Function \code{molvol} estimates the volume of one liter of a specific gas or
+the molar volume of an \code{ideal} gas.
+
+<<>>=
+molvol(species="ideal")
+molvol(species="ideal",t=1:10)
+@
+<<>>=
+1/molvol(species="O2",t=0)*1000
+1/molvol(species="O2",q=1:6,t=0)
+1/molvol(t=1:5,species=c("CO2","O2","N2O"))
+@
+
+\subsection{Average elemental composition of biomass}
+
+
+The average elemental composition of marine plankton (Redfield ratio)
+is traditionally assumed to be $\rm C_{106}H_{263}O_{110}N_{16}P_{1}$
+\citep{Redfield1934, Redfield1963, Richards1965}, while Limnologists
+sometimes assume a ratio of $\rm C_{106}H_{180}O_{45}N_{16}P_{1}$
+\citep{Stumm1964}. Since then, the ratio of C:N:P was widely agreed,
+but there is still discussion about the average of O and H.
+\citet{Anderson1995} proposed a new formula $\rm
+C_{106}H_{175}O_{42}N_{16}P_{1}$ for marine plankton and similarly
+\citet{Hedges2002}, who used NMR analysis, found an elemental
+composition with much less hydrogen and oxygen ($\rm
+C_{106}H_{175-180}O_{35-40}N_{15–20}S_{0.3-0.5}$) than in the original
+formula.
+
+Function \code{redfield} can be used to simplify conversions between
+the main elements of biomass, where the default molar ratio can be
+displayed by:
+
+<<>>=
+redfield(1, "P")
+@
+
+The second argument of the function allows to rescale this to any of
+the constitutional elements, e.g. to nitrogen:
+
+<<>>=
+redfield(1, "N")
+@
+
+In addition, it is also possible to request the output in mass units,
+e.g. how many mass units of the elements are related to 2 mass units
+(e.g. mg) of phosphorus:
+
+<<>>=
+redfield(2, "P", "mass")
+@
+
+Finally, mass percentages can be obtained by:
+
+<<>>=
+x <- redfield(1, "P", "mass")
+x / sum(x)
+@
+
+or by using an alternative alternative elemental composition with:
+
+<<>>=
+stumm <- c(C=106, H=180, O=45, N=16, P=1)
+x <- redfield(1, "P", "mass", ratio = stumm)
+x / sum(x)
+@
+
+Note however, that all these formulae are intended to approximate the
+\textbf{average} biomass composition and that large differences are
+natural for specific observations, depending on the involved species
+and their physiological state.
+
+
+\subsection{Pressure conversions }
+
+\code{convert_p} converts between the different barometric scales:
+
+<<>>=
+convert_p(1, "atm")
+@
+
+\subsection{Temperature conversions}
+
+Function \code{convert_T} converts between different temperature
+scales (Kelvin, Celsius, Fahrenheit):
+
+<<>>=
+convert_T(1, "C")
+@
+
+\subsection{Salinity and chlorinity}
+
+The relationship between Salinity, chlorinity and conductivity is in
+various functions:
+
+<<>>=
+convert_StoCl(S=35)
+convert_RtoS(R=1)
+convert_StoR(S=35)
+@
+
+\section{Finally}
+
+This vignette was made with Sweave \citep{Leisch02}.
 
 \clearpage
 \bibliography{vignettes}

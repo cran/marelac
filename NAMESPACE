@@ -1,2 +1,23 @@
-export(coriolis, cp, diffcoeff, g2mol, l2mol, mol.vol, mol.weight, mol2l, sal2cl,
-       salconc, satconc, viscosity)
+useDynLib(marelac)
+#physical
+export(gravity,coriolis,viscosity,diffcoeff,vapor,ssd2rad)
+
+#conversions from molars...
+# merged:mol.vol, mol2l , removed:l2mol, g2mol
+export(molvol,molweight)
+
+# conversions
+export(convert_StoCl,convert_RtoS,convert_StoR,convert_p,convert_T,
+       convert_AStoPS,convert_PStoAS)
+
+#gasses  - suggest to merge O2sat, satconc
+export(gas_O2sat,gas_satconc,gas_solubility,gas_schmidt,gas_transfer)
+
+#seawater
+export(sw_depth,sw_cp,sw_adtgrad,sw_tfreeze,sw_tpot,sw_svel,sw_dens,sw_gibbs,
+       sw_conserv,sw_comp,sw_alpha,sw_beta,sw_enthalpy,sw_entropy,
+       sw_kappa,sw_kappa_t)
+
+#other
+export(vertmean, redfield,atmComp, earth_surf)
+
