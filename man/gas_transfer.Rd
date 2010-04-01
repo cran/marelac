@@ -1,6 +1,6 @@
 \name{gas_transfer}
 \alias{gas_transfer}
-\title{The Gas Transfer Coefficient in cm/hr}
+\title{The Gas Transfer Coefficient in m/sec}
 \description{
   The gas transfer coefficient, in \eqn{m s^{-1}}{m/sec}, for certain
   gases in seawater (S = 35).

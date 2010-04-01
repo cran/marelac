@@ -48,7 +48,7 @@ The Netherlands
 \Plainauthor{Karline Soetaert, Thomas Petzoldt and Filip Meysman}
 
 \Abstract{
-  \R package \m \citep{marelac} contains chemical and physical
+  \R{ }package \m \citep{marelac} contains chemical and physical
   constants and functions, datasets, routines for unit conversion, and
   other utilities useful for MArine, Riverine, Estuarine, LAcustrine
   and Coastal sciences.
@@ -100,7 +100,7 @@ options(width=75)
 
 \section{Introduction}
 
-\R-package \m has been designed as a tool for use by scientists
+\R{ } package \m has been designed as a tool for use by scientists
 working in the MArine, Riverine, Estuarine, LAcustrine and Coastal
 sciences.
 
@@ -121,6 +121,10 @@ It contains:
   derivation based on a Gibbs function \citep{Feistel08,McDougall}.
 \end{itemize}
 
+Package \m does \emph{not} contain chemical functions dealing with the 
+aquatic carbonate system (acidification, pH). These function can be found
+in two other \R{ }packages, i.e.
+\pkg{seacarb} \citep{seacarb} and \pkg{AquaEnv} \citep{AquaEnv}.
 \section{Constants and datasets}
 
 \subsection{Physical constants}
