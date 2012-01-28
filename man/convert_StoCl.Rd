@@ -10,7 +10,7 @@
 \value{
   The chlorinity concentration, g/kg
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
 \examples{
 convert_StoCl(20)
 }

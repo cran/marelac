@@ -12,7 +12,7 @@
   surroundings.
 }
 \usage{
-sw_adtgrad(S = 35, t = 25, p = P-1.013253, P=1.013253 )
+sw_adtgrad(S = 35, t = 25, p = P-1.013253, P = 1.013253 )
 }
 \arguments{
   \item{S }{Practical salinity (-),}
@@ -32,7 +32,8 @@ sw_adtgrad(S = 35, t = 25, p = P-1.013253, P=1.013253 )
   \code{sw_adtgrad} for S = 40, t = 40, p = 1000 is 3.255976e-3
 
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl> }
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
 sw_adtgrad(t = 40, S = 40, p = 1000)  #3.255976e-4
 

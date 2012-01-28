@@ -5,7 +5,7 @@
   Computes the seawater isentropic compressibility, 1/bar
 }
 \usage{
-sw_kappa(S = 35, t = 25, p = P-1.013253, P=1.013253)
+sw_kappa(S = 35, t = 25, p = P-1.013253, P = 1.013253)
 }
 \arguments{
   \item{S }{Salinity (dimensionless),}
@@ -17,9 +17,10 @@ sw_kappa(S = 35, t = 25, p = P-1.013253, P=1.013253)
 \value{
   Isentropic compressibility, 1/bar
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
-sw_kappa(35.7,25.5,102.3) #4.03386268546478e-6
+sw_kappa(35.7, 25.5, 102.3) #4.03386268546478e-6
 }
 \references{
   Feistel R, 2008. A Gibbs function for seawater thermodynamics for -6 to

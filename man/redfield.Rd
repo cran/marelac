@@ -7,7 +7,8 @@
   Redfield ratio.
 }
 \usage{
-redfield(q, species, method = c("mol", "mass"), ratio = c(C=106, H=263, O=110, N=16, P=1))
+redfield(q, species, method = c("mol", "mass"), 
+         ratio = c(C=106, H=263, O=110, N=16, P=1))
 }
 \arguments{
   \item{q}{amount of substance of that element (in mol or mass units),}
@@ -22,7 +23,8 @@ redfield(q, species, method = c("mol", "mass"), ratio = c(C=106, H=263, O=110, N
   \eqn{C_{106}H_{263}O_{110}N_{16}P_{1}}{C106 H263 O110 N16 P1}
   (Redfield 1934, 1963, Richards 1965). Note that while the C:N:P ratio
   is widely agreed there is still discussion about the average of O and
-  H, e.g. \eqn{C_{106}H_{180}O_{45}N_{16}P_{1}}{C106 H180 O45 N16 P1}.
+  H, e.g. \eqn{C_{106}H_{180}O_{45}N_{16}P_{1}}{C106 H180 O45 N16 P1}
+  (Stumm, 1964).
 
   Note also that there are, of course, large differences depending on
   species and physiological state.
@@ -45,7 +47,12 @@ redfield(q, species, method = c("mol", "mass"), ratio = c(C=106, H=263, O=110, N
   Richards FA, 1965. Anoxic basins and fjords. In: Riley JP, Skirrow
   D. (Eds.), Chemical Oceanography, vol. 1. Academic Press, New York,
   611-645. (cited in Hedges et al, 2002).
-
+  
+  Stumm W, 1964. Discussion (Methods for the removal of phosphorus and
+  nitrogen from sewage plant effluents by G. A. Rohlich). In
+  Eckenfelder, WW (ed.), Advances in water pollution research. Proc. 1st
+  Int. Conf. London 1962, volume 2, pp. 216-229. Pergamon.
+    
   Vollenweider RA, 1985. Elemental and biochemical composition of
   plankton biomass: some comments and explorations. Arch.
   Hydrobiol. 105, 11-29.
@@ -73,14 +80,15 @@ redfield(c(1, 2, 3), "N", "mass")
 x <- redfield(1, "P", "mass")
 x / sum(x)
 
-## with alternative elemental composition
-x <- redfield(1, "P", "mass", ratio=c(C=106, H=180, O=45, N=16, P=1))
+## with alternative elemental composition (Stumm, 1964)
+x <- redfield(1, "P", "mass", 
+              ratio = c(C = 106, H = 180, O = 45, N = 16, P = 1))
 x / sum(x)
 
 ## rule of thumb for fresh mass (in mg) formed by 1 microgram P
 redfield(1, "P", "mass")$C * 2 * 10 / 1000
 sum(redfield(1, "P", "mass",
-  ratio=c(C=106, H=180, O=45, N=16, P=1))) * 10 / 1000
+  ratio = c(C = 106, H = 180, O = 45, N = 16, P = 1))) * 10 / 1000
 
 }
 \keyword{ misc}

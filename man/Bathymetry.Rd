@@ -17,20 +17,21 @@
     \item{z}{the height (m).}
   }
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
 \examples{
-par(mar=c(2,2,2,2))
-image(Bathymetry$x,Bathymetry$y,Bathymetry$z,col=femmecol(100),
-      asp=TRUE,xlab="dg",ylab="dg")
-contour(Bathymetry$x,Bathymetry$y,Bathymetry$z,asp=TRUE,add=TRUE)
+par(mar = c(2,2,2,2))
+image(Bathymetry$x, Bathymetry$y, Bathymetry$z, col = femmecol(100),
+      asp = TRUE, xlab = "dg", ylab = "dg")
+contour(Bathymetry$x, Bathymetry$y, Bathymetry$z, asp = TRUE, add = TRUE)
 
 
 # remove land
-zz     <- Bathymetry$z
-zz[zz>0]<-0
+zz       <- Bathymetry$z
+zz[zz>0] <- 0
 
-image(Bathymetry$x,Bathymetry$y,zz,col=c(femmecol(100),"black"),asp=TRUE)
-contour(Bathymetry$x,Bathymetry$y,zz,asp=TRUE,add=TRUE)
+image(Bathymetry$x, Bathymetry$y, zz, col = c(femmecol(100), "black"),
+      asp = TRUE)
+contour(Bathymetry$x, Bathymetry$y, zz, asp = TRUE, add = TRUE)
 }
 \references{
   Andersson H, Wijsman J, Herman PMJ, Middelburg J, Soetaert K and Heip

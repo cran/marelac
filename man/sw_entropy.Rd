@@ -5,7 +5,7 @@
   Computes the seawater specific entropy, J/(kg*K)
 }
 \usage{
-sw_entropy(S = 35, t = 25, p = P-1.013253, P=1.013253)
+sw_entropy(S = 35, t = 25, p = P-1.013253, P = 1.013253)
 }
 \arguments{
   \item{S }{Absolute salinity (g/kg),}
@@ -17,9 +17,10 @@ sw_entropy(S = 35, t = 25, p = P-1.013253, P=1.013253)
 \value{
   Specific entropy, J/(kg*K).
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
-sw_entropy(35.7,25.5,102.3) #352.81879771528
+sw_entropy(35.7, 25.5, 102.3) #352.81879771528
 }
 \references{
   Feistel R, 2008. A Gibbs function for seawater thermodynamics for -6 to

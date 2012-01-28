@@ -5,7 +5,7 @@
   Computes the gravity, based on latitude.
 }
 \usage{
-gravity(lat = 0, method=c("Moritz","UNESCO"))
+gravity(lat = 0, method = c("Moritz", "UNESCO"))
 }
 \arguments{
   \item{lat }{latitude (-90 - +90).}
@@ -16,7 +16,8 @@ gravity(lat = 0, method=c("Moritz","UNESCO"))
 \value{
   Gravity, in \eqn{\rm m\,sec^{-2}}{m/s2}.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
 gravity(lat = 30)}
 \references{

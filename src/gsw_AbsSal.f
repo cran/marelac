@@ -316,8 +316,8 @@ c
           k = n-1
         else
           call rwarn("ERROR in indx.f : out of range")
-          write (msg,*) z,n,x
-          call rexit(msg)
+C          write (msg,*) z,n,x
+C          call rexit(msg)
         end if
 
       end if

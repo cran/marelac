@@ -1,6 +1,7 @@
 useDynLib(marelac)
 #physical
-export(gravity,coriolis,viscosity,diffcoeff,vapor,ssd2rad)
+export(gravity,coriolis,viscosity,diffcoeff,vapor,vapor.hPa,ssd2rad,
+       air_density, air_spechum)
 
 #conversions from molars...
 # merged:mol.vol, mol2l , removed:l2mol, g2mol

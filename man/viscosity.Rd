@@ -22,15 +22,16 @@ viscosity(S = 35, t = 25, P = 1.013253)
 \value{
   Shear visocisity in centipoise.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl> }
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
 plot(0:30, viscosity(t = 0:30, S = 35, P = 1),
-  xlab = "temperature", ylab = "g/m/s",
-  main = "shear viscosity of water", type = "l")
+      xlab = "temperature", ylab = "g/m/s",
+      main = "shear viscosity of water", type = "l")
 lines(0:30, viscosity(t = 0:30, S = 0, P = 1), col = "red")
 lines(0:30, viscosity(t = 0:30, S = 35, P = 100), col = "blue")
 legend("topright", col = c("black","red","blue"), lty = 1,
-  legend = c("S=35, P=1", "S=0, P=1", "S=35, P=100"))
+        legend = c("S=35, P=1", "S=0, P=1", "S=35, P=100"))
 }
 \references{
   Based on the FORTRAN implementation of the diagenetic model "CANDI" of

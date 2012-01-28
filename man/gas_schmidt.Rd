@@ -27,9 +27,10 @@ gas_schmidt(t = 25, species = c("He", "Ne", "N2", "O2", "Ar",
   The Schmidt number, a dimensionless quantity.
 }
 
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
-gas_schmidt(species = "CO2", t=20) # about660
+gas_schmidt(species = "CO2", t = 20) # about660
 }
 \references{
   Sarmiento JL and Gruber N, 2006. Ocean Biogeochemical

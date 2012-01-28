@@ -41,8 +41,8 @@
   \tabular{ll}{
     Package: \tab marelac\cr
     Type: \tab Package\cr
-    Version: \tab 2.1\cr
-    Date: \tab 2009-09-15\cr
+    Version: \tab 2.2\cr
+    Date: \tab 2010-11-11\cr
     License: \tab GNU Public License 2 or above\cr
   }
 }
@@ -52,6 +52,8 @@
   Filip Meysman
   
   Thomas Petzoldt
+  
+  with contributions from Lorenz Meire
 }
 \references{
   
@@ -115,7 +117,8 @@ for atmospheric gasses:
 
 \code{\link{gas_satconc}}, \code{\link{gas_O2sat}},
 \code{\link{gas_schmidt}}, \code{\link{gas_solubility}}, \code{\link{gas_transfer}},
-\code{\link{atmComp}}, \code{\link{vapor}}
+\code{\link{atmComp}}, \code{\link{vapor}}, \code{\link{air_spechum}},
+\code{\link{air_density}}
 
 conversions:
 

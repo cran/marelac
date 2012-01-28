@@ -33,7 +33,7 @@
 
 
 \author{Karline Soetaert\\
-NIOO-CEME\\
+NIOZ-Yerseke\\
 The Netherlands
 \And
 Thomas Petzoldt\\
@@ -41,7 +41,7 @@ Technische Universit\"at Dresden\\
 Germany
 \And
 Filip Meysman\\
-NIOO-CEME\\
+NIOZ-Yerseke\\
 The Netherlands
 }
 
@@ -58,11 +58,10 @@ The Netherlands
 %% in the following format:
 \Address{
   Karline Soetaert\\
-  Centre for Estuarine and Marine Ecology (CEME)\\
-  Netherlands Institute of Ecology (NIOO)\\
+  Royal Netherlands Institute of Sea Research (NIOZ)\\
   4401 NT Yerseke, Netherlands\\
-  E-mail: \email{k.soetaert@nioo.knaw.nl}\\
-  URL: \url{http://www.nioo.knaw.nl/users/ksoetaert}\\
+  E-mail: \email{karline.soetaert@nioz.nl}\\
+  URL: \url{http://http://www.nioz.nl/}\\
   \\
   Thomas Petzoldt\\
   Institut f\"ur Hydrobiologie\\
@@ -72,10 +71,9 @@ The Netherlands
   URL: \url{http://tu-dresden.de/Members/thomas.petzoldt/}\\
   \\
   Filip Meysman\\
-  Centre for Estuarine and Marine Ecology (CEME)\\
-  Netherlands Institute of Ecology (NIOO)\\
+  Royal Netherlands Institute of Sea Research (NIOZ)\\
   4401 NT Yerseke, Netherlands\\
-  E-mail: \email{f.meysman@nioo.knaw.nl}
+  E-mail: \email{filip.meysman@nioz.nl}
 }
 
 
@@ -133,9 +131,9 @@ Dataset \code{Constants} contains commonly used physical and chemical
 constants, as in \citet{Mohr05}:
 
 <<>>=
-data.frame(cbind(acronym=names(Constants),
-             matrix(ncol=3,byrow=TRUE,data=unlist(Constants),
-             dimnames=list(NULL,c("value","units","description")))))
+data.frame(cbind(acronym = names(Constants),
+             matrix(ncol = 3, byrow = TRUE, data = unlist(Constants),
+             dimnames=list(NULL, c("value", "units", "description")))))
 
 @
 
@@ -145,9 +143,9 @@ Dataset \code{Oceans} contains surfaces and volumes of the world oceans
 as in \citet{Sarmiento06}:
 
 <<>>=
-data.frame(cbind(acronym=names(Oceans),
-             matrix(ncol=3,byrow=TRUE,data=unlist(Oceans),
-             dimnames=list(NULL,c("value","units","description")))))
+data.frame(cbind(acronym = names(Oceans),
+             matrix(ncol = 3, byrow = TRUE, data = unlist(Oceans),
+             dimnames = list(NULL, c("value", "units", "description")))))
 @
 
 \subsection{World bathymetric data}
@@ -158,17 +156,18 @@ land) (Fig.\ref{fig:f1}):
 
 <<label=bat,include=FALSE>>=
 require(marelac)
-image(Bathymetry$x,Bathymetry$y,Bathymetry$z,col=femmecol(100),
-      asp=TRUE,xlab="",ylab="")
-contour(Bathymetry$x,Bathymetry$y,Bathymetry$z,add=TRUE)
+image(Bathymetry$x, Bathymetry$y, Bathymetry$z, col = femmecol(100),
+      asp = TRUE, xlab = "", ylab = "")
+contour(Bathymetry$x, Bathymetry$y, Bathymetry$z, add = TRUE)
 @
 
 \setkeys{Gin}{width=0.8\textwidth}
 \begin{figure}
 \begin{center}
-<<label=batfig,fig=TRUE,echo=FALSE>>=
-<<bat>>
-@
+%%<<label=batfig,fig=TRUE,echo=FALSE>>=
+%%<<bat>>
+%%@
+\includegraphics{bathymetry.jpeg}
 \end{center}
 \caption{Image plot of ocean bathymetry - see text for \proglang{R}-code}
 \label{fig:f1}
@@ -183,18 +182,18 @@ As an example, we use it to estimate the surface of the earth; the true
 surface is 510072000 $\rm km^2$:
 
 <<>>=
-SURF <- outer(X=Bathymetry$x,
-               Y=Bathymetry$y,
-               FUN <- function(X,Y) earth_surf(Y,X))
+SURF <- outer(X = Bathymetry$x,
+              Y = Bathymetry$y,
+              FUN <- function(X, Y) earth_surf(Y, X))
 sum(SURF)
 @
 Similarly, we can estimate the surface and volume of the oceans; it should
 be $3.58e^{14}$ and $1.34e^{+18}$ respectively.
 
 <<>>=
- sum(SURF*(Bathymetry$z<0))
+ sum(SURF*(Bathymetry$z < 0))
 
-- sum(SURF*Bathymetry$z*(Bathymetry$z<0))
+- sum(SURF*Bathymetry$z*(Bathymetry$z < 0))
 @
 
 Combined with the dataset \code{Bathymetry}, function
@@ -204,16 +203,16 @@ certain water depths (Fig.\ref{fig:fo}):
 <<>>=
 SurfDepth <- vector()
 
-dseq <- seq(-7500,-250,by=250)
+dseq <- seq(-7500, -250, by = 250)
 
 for (i in 2:length(dseq)) {
-  ii <- which (Bathymetry$z>dseq[i-1]&Bathymetry$z<=dseq[i])
+  ii <- which (Bathymetry$z > dseq[i-1] & Bathymetry$z <= dseq[i])
   SurfDepth[i-1]<-sum(SURF[ii])
 }
 @
 
 <<label=ocean,include=FALSE>>=
-plot(dseq[-1],SurfDepth, xlab="depth, m", log="y",
+plot(dseq[-1], SurfDepth, xlab="depth, m", log = "y",
      ylab = "m2", main = "Surface at ocean depths")
 @
 
@@ -240,7 +239,7 @@ elements (see also \code{molweight}).
 
 <<>>=
 AtomicWeight
-AtomicWeight[8,]
+AtomicWeight[8, ]
 (W_H2O<- with (atomicweight, 2 * H + O))
 @
 
@@ -267,8 +266,8 @@ $\omega=7.292e^{-5} \rm radians\, sec^{-1}$.
 The following R-script plots the coriolis factor as a function of latitude
 (Fig.\ref{fig:cor}):
 <<label=cor,include=FALSE>>=
-plot(-90:90,coriolis(-90:90),xlab="latitude, dg North",
-                 ylab= "/s" , main ="Coriolis factor",type="l",lwd=2)
+plot(-90:90, coriolis(-90:90), xlab = "latitude, dg North",
+     ylab = "/s" , main = "Coriolis factor", type = "l", lwd = 2)
 @
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}
@@ -288,20 +287,20 @@ temperature (t) and pressure (P) is estimated. The implementation is
 based on Chapter 4 in \citep{Boudreau97}.
 
 <<>>=
-diffcoeff(S=15,t=15)*24*3600*1e4  # cm2/day
-diffcoeff(t=10)$O2
+diffcoeff(S = 15, t = 15)*24*3600*1e4  # cm2/day
+diffcoeff(t = 10)$O2
 @
 Values of the diffusion coefficients for a temperature range of 0 to 30 and
 for the 13 first species is in (Fig.\ref{fig:diff}):
 <<>>=
-difftemp <- diffcoeff(t=0:30)[,1:13]
+difftemp <- diffcoeff(t = 0:30)[ ,1:13]
 @
 
 <<label=diff,include=FALSE>>=
-matplot(0:30,difftemp,xlab="temperature",ylab=" m2/sec",
-        main="Molecular/ionic diffusion",type="l")
-legend("topleft",ncol=2,cex=0.8,title="mean",col=1:13,lty=1:13,
-        legend=cbind(names(difftemp),format(colMeans(difftemp),digits=4)))
+matplot(0:30, difftemp, xlab = "temperature", ylab = " m2/sec",
+        main = "Molecular/ionic diffusion", type = "l")
+legend("topleft", ncol = 2, cex = 0.8, title = "mean", col = 1:13, lty = 1:13, 
+   legend = cbind(names(difftemp), format(colMeans(difftemp),digits = 4)))
 @
 
 \setkeys{Gin}{width=0.6\textwidth}
@@ -321,12 +320,12 @@ centipoise ($\rm g m^{-1} sec^{-1}$). The formula is valid for $0 < t <
 30$ and $0 < S < 36$ (Fig.\ref{fig:vis}).
 
 <<label=visc,include=FALSE>>=
-plot(0:30,viscosity(S=35,t=0:30,P=1),xlab="temperature",ylab="g/m/s",
-       main="shear viscosity of water",type="l")
-lines(0:30,viscosity(S=0,t=0:30,P=1),col="red")
-lines(0:30,viscosity(S=35,t=0:30,P=100),col="blue")
-legend("topright",col=c("black","red","blue"),lty=1,
-        legend=c("S=35,P=1","S=0,P=1","S=35,P=100"))
+plot(0:30, viscosity(S = 35, t = 0:30, P = 1), xlab = "temperature",
+      ylab = "g/m/s", main = "shear viscosity of water",type = "l")
+lines(0:30, viscosity(S = 0, t = 0:30, P = 1), col = "red")
+lines(0:30, viscosity(S = 35, t = 0:30, P = 100), col = "blue")
+legend("topright", col = c("black", "red", "blue"), lty = 1,
+        legend = c("S=35, P=1", "S=0, P=1", "S=35, P=100"))
 @
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}
@@ -359,12 +358,13 @@ gas_O2sat(S=35, t=20)*1000/molweight("O2")
 @
 The effect of salinity on saturated concentration is in (Fig.\ref{fig:o2sat}).
 <<label=o2sat,include=FALSE>>=
-  plot(t, gas_O2sat(t = t), type = "l", ylim = c(0, 15), lwd=2,
-       main="Oxygen saturation", ylab = "mg/l", xlab="temperature")
-  lines(t, gas_O2sat(S = 0, t = t, method = "Weiss"), col = "green",
-        lwd = 2, lty = "dashed")
-  lines(t, gas_O2sat(S = 35, t = t, method = "Weiss"), col = "red", lwd = 2)
-  legend("topright",c("S=35","S=0"),col=c("red","green"), lty=c(1,2), lwd=2)
+plot(t, gas_O2sat(t = t), type = "l", ylim = c(0, 15), lwd = 2,
+     main = "Oxygen saturation", ylab = "mg/l", xlab = "temperature")
+lines(t, gas_O2sat(S = 0, t = t, method = "Weiss"), col = "green",
+      lwd = 2, lty = "dashed")
+lines(t, gas_O2sat(S = 35, t = t, method = "Weiss"), col = "red", lwd = 2)
+legend("topright", c("S=35", "S=0"), col = c("red","green"), 
+       lty = c(1, 2), lwd = 2)
 @
 
 \setkeys{Gin}{width=0.6\textwidth}
@@ -385,40 +385,40 @@ More solubilities and saturated concentrations (in $\rm mmol m^{-3}$) are in
 functions \code{gas_solubility} and \code{gas_satconc}.
 
 <<>>=
-gas_satconc(species="O2")
-Temp<-seq(from=0,to=30,by=0.1)
-Sal <- seq(from=0,to=35,by=0.1)
+gas_satconc(species = "O2")
+Temp <- seq(from = 0, to = 30, by = 0.1)
+Sal  <- seq(from = 0, to = 35, by = 0.1)
 @
 We plot the saturated concentrations for a selection of species as a
 function of temperature and salinity (Fig.\ref{fig:solub}):
 <<label=solub,include=FALSE>>=
 #
-mf  <-par(mfrow=c(2,2))
+mf  <-par(mfrow = c(2, 2))
 #
-gs  <-gas_solubility(t=Temp)
-species   <- c("CCl4","CO2","N2O","Rn","CCl2F2")
-matplot(Temp,gs[,species],type="l",lty=1,lwd=2,xlab="temperature",
-     ylab="mmol/m3",main="solubility (S=35)")
-legend("topright",col=1:5,lwd=2,legend=species)
+gs  <-gas_solubility(t = Temp)
+species   <- c("CCl4", "CO2", "N2O", "Rn", "CCl2F2")
+matplot(Temp, gs[, species], type = "l", lty = 1, lwd = 2, xlab = "temperature",
+     ylab = "mmol/m3", main = "solubility (S=35)")
+legend("topright", col = 1:5, lwd = 2, legend = species)
 #
-species2 <- c("Kr","CH4","Ar","O2","N2","Ne")
-matplot(Temp,gs[,species2],type="l",lty=1,lwd=2,xlab="temperature",
-     ylab="mmol/m3",main="solubility (S=35)")
-legend("topright",col=1:6,lwd=2,legend=species2)
+species2 <- c("Kr", "CH4", "Ar", "O2", "N2", "Ne")
+matplot(Temp, gs[, species2], type = "l", lty = 1, lwd = 2, xlab = "temperature",
+     ylab = "mmol/m3", main = "solubility (S=35)")
+legend("topright", col = 1:6, lwd = 2, legend = species2)
 #
 
-species <- c("N2","CO2","O2","CH4","N2O")
-gsat  <-gas_satconc(t=Temp,species=species)
-matplot(Temp,gsat,type="l",xlab="temperature",log="y", lty=1,
-     ylab="mmol/m3",main="Saturated conc (S=35)",lwd=2)
-legend("right",col=1:5,lwd=2,legend=species)
+species <- c("N2", "CO2", "O2", "CH4", "N2O")
+gsat  <-gas_satconc(t = Temp, species = species)
+matplot(Temp, gsat, type = "l", xlab = "temperature", log = "y", lty = 1,
+     ylab = "mmol/m3", main = "Saturated conc (S=35)", lwd = 2)
+legend("right", col = 1:5, lwd = 2, legend = species)
 #
-gsat  <-gas_satconc(S=Sal,species=species)
-matplot(Sal,gsat,type="l",xlab="salinity",log="y", lty=1,
-     ylab="mmol/m3",main="Saturated conc (T=20)",lwd=2)
-legend("right",col=1:5,lwd=2,legend=species)
+gsat  <-gas_satconc(S = Sal, species = species)
+matplot(Sal, gsat, type = "l", xlab = "salinity", log = "y", lty = 1,
+     ylab = "mmol/m3", main = "Saturated conc (T=20)", lwd = 2)
+legend("right", col = 1:5, lwd = 2, legend = species)
 #
-par("mfrow"=mf)
+par("mfrow" = mf)
 @
 
 \setkeys{Gin}{width=0.8\textwidth}
@@ -439,7 +439,7 @@ the atmospheric pressure (Fig.\ref{fig:vapor}).
 
 <<label=vapor,include=FALSE>>=
 plot(0:30, vapor(t = 0:30), xlab = "Temperature, dgC", ylab = "pH2O/P",
-     type ="l")
+     type = "l")
 @
 
 \setkeys{Gin}{width=0.6\textwidth}
@@ -461,20 +461,24 @@ quantity in the gas transfer velocity calculation
 measured 10 metres above sea level ($u_{10}$)) (Fig.\ref{fig:transfer}).
 
 <<>>=
-gas_schmidt(species="CO2",t=20)
+gas_schmidt(species = "CO2", t = 20)
 
 useq <- 0:15
 @
 
 <<label=transfer,include=FALSE>>=
-plot(useq,gas_transfer(u10=useq,species="O2"),type="l",lwd=2,xlab="u10,m/s",
-     ylab="m/s", main="O2 gas transfer velocity",ylim=c(0,3e-4))
-lines(useq,gas_transfer(u10=useq,species="O2",method="Nightingale"),lwd=2,lty=2)
-lines(useq,gas_transfer(u10=useq,species="O2",method="Wanninkhof1"),lwd=2,lty=3)
-lines(useq,gas_transfer(u10=useq,species="O2",method="Wanninkhof2"),lwd=2,lty=4)
+plot(useq, gas_transfer(u10 = useq, species = "O2"), type = "l", 
+     lwd = 2, xlab = "u10,m/s", ylab = "m/s", 
+     main = "O2 gas transfer velocity", ylim = c(0, 3e-4))
+lines(useq, gas_transfer(u10 = useq, species = "O2", method = "Nightingale"),
+      lwd = 2, lty = 2)
+lines(useq, gas_transfer(u10 = useq, species = "O2", method = "Wanninkhof1"), 
+      lwd = 2, lty = 3)
+lines(useq, gas_transfer(u10 = useq, species = "O2", method = "Wanninkhof2"),
+      lwd = 2, lty = 4)
 
-legend("topleft",lty=1:4,lwd=2,legend=c("Liss and Merlivat 1986",
-"Nightingale et al. 2000","Wanninkhof 1992","Wanninkhof and McGills 1999"))
+legend("topleft", lty = 1:4, lwd = 2, legend = c("Liss and Merlivat 1986",
+   "Nightingale et al. 2000", "Wanninkhof 1992", "Wanninkhof and McGills 1999"))
 @
 
 \setkeys{Gin}{width=0.6\textwidth}
@@ -495,7 +499,7 @@ Borate, calcite, sulphate and fluoride concentrations can be estimated
 as a function of the seawater salinity:
 
 <<>>=
-sw_conserv(S=seq(0,35,by=5))
+sw_conserv(S = seq(0, 35, by = 5))
 @
 
 \subsection{Two salinity scales}
@@ -516,8 +520,8 @@ The conversion between salinity scales is done with functions:
 For example:
 
 <<>>=
-convert_AStoPS(S=35)
-convert_PStoAS(S=35)
+convert_AStoPS(S = 35)
+convert_PStoAS(S = 35)
 @
 
 These functions have as extra arguments the gauge pressure (\code{p}),
@@ -545,21 +549,21 @@ i.e. for \code{p=0} (Fig.\ref{fig:sfac}).\footnote{Before plotting, the negative
   are denoted with \code{-99}.}.
 
 <<>>=
-convert_PStoAS(S=35,lat=-10,lon=0)
-convert_PStoAS(S=35,lat=0,lon=0)
-convert_PStoAS(S=35,lat=10,lon=0)
-convert_PStoAS(S=35,lat=-10,lon=0)
+convert_PStoAS(S = 35, lat = -10, lon = 0)
+convert_PStoAS(S = 35, lat = 0, lon = 0)
+convert_PStoAS(S = 35, lat = 10, lon = 0)
+convert_PStoAS(S = 35, lat = -10, lon = 0)
 
-convert_PStoAS(S=35,lat=-10, DSi=1:10, Ocean="Pacific")
+convert_PStoAS(S = 35, lat = -10, DSi = 1:10, Ocean = "Pacific")
 
-dsal <- t(sw_sfac$del_sa[1,,])
-dsal [dsal < -90]<-NA
+dsal <- t(sw_sfac$del_sa[1, , ])
+dsal [dsal < -90] <- NA
 @
 <<label=sfac,include=FALSE>>=
-image(sw_sfac$longs, sw_sfac$lats, dsal, col=femmecol(100),
-      asp=TRUE, xlab="dg", ylab="dg",
-      main="salinity conversion - p = 0 bar")
-contour(sw_sfac$longs, sw_sfac$lats, dsal, asp=TRUE, add=TRUE)
+image(sw_sfac$longs, sw_sfac$lats, dsal, col = femmecol(100),
+      asp = TRUE, xlab = "dg", ylab = "dg",
+      main = "salinity conversion - p = 0 bar")
+contour(sw_sfac$longs, sw_sfac$lats, dsal, asp = TRUE, add = TRUE)
 @
 \setkeys{Gin}{width=0.6\textwidth}
 \begin{figure}
@@ -574,16 +578,16 @@ and vice versa}
 Finally, the correction factors are plotted versus depth, at four latitudinal
 cross-sections (Fig.\ref{fig:sfac2}):
 <<label=sfac2,include=FALSE>>=
-ii <- c(6,21,24,43)
-par(mfrow=c(2,2))
+ii <- c(6, 21, 24, 43)
+par(mfrow = c(2, 2))
 for ( i in ii)
 {
-dsal <- t(sw_sfac$del_sa[,i,])
-dsal [dsal < -90]<-0
-image(sw_sfac$longs, sw_sfac$p, dsal, col=c("black",femmecol(100)),
-      xlab="longitude, dg", ylab="depth, m", zlim=c(0,0.018),
-      main=sw_sfac$lat[i],ylim=c(6000,0))
-contour(sw_sfac$longs, sw_sfac$p, dsal, asp=TRUE, add=TRUE)
+dsal <- t(sw_sfac$del_sa[ ,i, ])
+dsal [dsal < -90] <- 0
+image(sw_sfac$longs, sw_sfac$p, dsal, col = c("black", femmecol(100)),
+      xlab = "longitude, dg", ylab = "depth, m", zlim = c(0, 0.018),
+      main = sw_sfac$lat[i], ylim = c(6000, 0))
+contour(sw_sfac$longs, sw_sfac$p, dsal, asp = TRUE, add = TRUE)
 }
 @
 \setkeys{Gin}{width=0.6\textwidth}
@@ -615,8 +619,8 @@ salinity scale \citep{Millero08}, while the UNESCO polynomial uses
 practical salinity.
 
 <<>>=
-sw_cp(S=40,t=1:20)
-sw_cp(S=40,t=1:20,method="UNESCO")
+sw_cp(S = 40,t = 1:20)
+sw_cp(S = 40,t = 1:20, method = "UNESCO")
 @
 
 The precision of the calculations can be assessed by comparing them to
@@ -626,16 +630,16 @@ some test values:
 t  <-  25.5
 p  <- 1023/10  # pressure in bar
 S  <- 35.7
-sw_alpha(S,t,p)               -0.0003098378393192645
-sw_beta(S,t,p)                -0.0007257297978386655
-sw_cp(S,t,p)                  -3974.42541259729
-sw_tpot(S,t,p)                -25.2720983155409
-sw_dens(S,t,p)                -1027.95249315662
-sw_enthalpy(S,t,p)            -110776.712408975
-sw_entropy(S,t,p)             -352.81879771528
-sw_kappa(S,t,p)               -4.033862685464779e-6
-sw_kappa_t(S,t,p)             -4.104037946151349e-6
-sw_svel(S,t,p)                -1552.93372863425
+sw_alpha(S, t, p)               -0.0003098378393192645
+sw_beta(S, t, p)                -0.0007257297978386655
+sw_cp(S,t, p)                   -3974.42541259729
+sw_tpot(S, t, p)                -25.2720983155409
+sw_dens(S, t, p)                -1027.95249315662
+sw_enthalpy(S, t, p)            -110776.712408975
+sw_entropy(S, t, p)             -352.81879771528
+sw_kappa(S, t, p)               -4.033862685464779e-6
+sw_kappa_t(S, t, p)             -4.104037946151349e-6
+sw_svel(S, t, p)                -1552.93372863425
 @
 
 Below we plot all implemented thermophysical properties as a function
@@ -643,24 +647,24 @@ of salinity and temperature (Fig.\ref{fig:sw}, \ref{fig:sw2}).
 We first define a function that makes the plots:
 
 <<label=sw,include=FALSE>>=
-plotST <- function(fun,title)
+plotST <- function(fun, title)
 {
-  Sal <-  seq(0,40,by=0.5)
-  Temp<- seq(-5,40,by=0.5)
+  Sal  <-  seq(0, 40, by = 0.5)
+  Temp <- seq(-5, 40, by = 0.5)
 
-  Val <- outer(X=Sal,Y=Temp,FUN=function(X,Y) fun(S=X, t=Y))
-  contour(Sal,Temp,Val,xlab="Salinity",ylab="temperature",
-          main=title,nlevel=20)
+  Val <- outer(X = Sal, Y = Temp, FUN = function(X, Y) fun(S = X, t = Y))
+  contour(Sal, Temp, Val, xlab = "Salinity", ylab = "temperature",
+          main = title, nlevel = 20)
 }
 
-par (mfrow=c(3,2))
-par(mar=c(4,4,3,2))
-plotST(sw_gibbs,"Gibbs function")
-plotST(sw_cp,"Heat capacity")
-plotST(sw_entropy,"Entropy")
-plotST(sw_enthalpy,"Enthalpy")
-plotST(sw_dens,"Density")
-plotST(sw_svel,"Sound velocity")
+par (mfrow = c(3, 2))
+par(mar = c(4, 4, 3, 2))
+plotST(sw_gibbs, "Gibbs function")
+plotST(sw_cp, "Heat capacity")
+plotST(sw_entropy, "Entropy")
+plotST(sw_enthalpy, "Enthalpy")
+plotST(sw_dens, "Density")
+plotST(sw_svel, "Sound velocity")
 @
 
 \setkeys{Gin}{width=0.9\textwidth}
@@ -675,14 +679,14 @@ plotST(sw_svel,"Sound velocity")
 \end{figure}
 
 <<label=sw2,include=FALSE>>=
-par (mfrow=c(3,2))
-par(mar=c(4,4,3,2))
-plotST(sw_kappa,"Isentropic compressibility")
-plotST(sw_kappa_t,"Isothermal compressibility")
-plotST(sw_alpha,"Thermal expansion coefficient")
-plotST(sw_beta,"Haline contraction coefficient")
-plotST(sw_adtgrad,"Adiabatic temperature gradient")
-par (mfrow=c(1,1))
+par (mfrow = c(3, 2))
+par(mar = c(4, 4, 3, 2))
+plotST(sw_kappa, "Isentropic compressibility")
+plotST(sw_kappa_t, "Isothermal compressibility")
+plotST(sw_alpha, "Thermal expansion coefficient")
+plotST(sw_beta, "Haline contraction coefficient")
+plotST(sw_adtgrad, "Adiabatic temperature gradient")
+par (mfrow = c(1, 1))
 @
 \setkeys{Gin}{width=0.9\textwidth}
 \begin{figure}
@@ -698,15 +702,15 @@ par (mfrow=c(1,1))
 The difference between the two formulations, based on the UNESCO polynomial
 or the Gibss function is also instructive (Fig.\ref{fig:sw3}):
 <<label=sw3,include=FALSE>>=
-par (mfrow=c(2,2))
-par(mar=c(4,4,3,2))
-plotST(function(S,t) sw_dens(S,t,method="UNESCO")-sw_dens(S,t),
+par (mfrow = c(2, 2))
+par(mar = c(4, 4, 3, 2))
+plotST(function(S, t) sw_dens(S, t, method = "UNESCO") - sw_dens(S, t),
   "Density UNESCO - Gibbs")
-plotST(function(S,t) sw_cp(S,t,method="UNESCO")-sw_cp(S,t),
+plotST(function(S, t) sw_cp(S, t, method = "UNESCO") - sw_cp(S, t),
   "Heat capacity UNESCO - Gibbs")
-plotST(function(S,t) sw_svel(S,t,method="UNESCO")-sw_svel(S,t),
+plotST(function(S, t) sw_svel(S, t, method = "UNESCO") - sw_svel(S, t),
   "Sound velocity UNESCO - Gibbs")
-par (mfrow=c(1,1))
+par (mfrow = c(1, 1))
 @
 \setkeys{Gin}{width=0.9\textwidth}
 \begin{figure}
@@ -747,13 +751,16 @@ We can use that to estimate the importance of molecular weight on
 certain physical properties (Fig.\ref{fig:mw}):
 
 <<>>=
-gs <- gas_solubility()
-species <- colnames(gs)
+#species <- colnames(gs)  ## thpe: does not work any more, because 1D return value is vector
+species = c("He", "Ne", "N2", "O2",
+  "Ar", "Kr", "Rn", "CH4", "CO2", "N2O", "CCl2F2", "CCl3F", "SF6", "CCl4")
+gs <- gas_solubility(species = species)
 mw <- molweight(species)
 @
 <<label=mwgs,include=FALSE>>=
-plot(mw,gs,type="n",xlab="molecular weight", ylab="solubility", log="y")
-text(mw,gs,species)
+plot(mw, gs, type = "n", xlab = "molecular weight", 
+     ylab = "solubility", log = "y")
+text(mw, gs, species)
 @
 
 \setkeys{Gin}{width=0.6\textwidth}
@@ -772,13 +779,13 @@ Function \code{molvol} estimates the volume of one liter of a specific gas or
 the molar volume of an \code{ideal} gas.
 
 <<>>=
-molvol(species="ideal")
-molvol(species="ideal",t=1:10)
+molvol(species = "ideal")
+molvol(species = "ideal", t = 1:10)
 @
 <<>>=
-1/molvol(species="O2",t=0)*1000
-1/molvol(species="O2",q=1:6,t=0)
-1/molvol(t=1:5,species=c("CO2","O2","N2O"))
+1/molvol(species = "O2", t = 0)*1000
+1/molvol(species = "O2", q = 1:6, t = 0)
+1/molvol(t = 1:5, species = c("CO2", "O2", "N2O"))
 @
 
 \subsection{Average elemental composition of biomass}
@@ -794,7 +801,7 @@ but there is still discussion about the average of O and H.
 C_{106}H_{175}O_{42}N_{16}P_{1}$ for marine plankton and similarly
 \citet{Hedges2002}, who used NMR analysis, found an elemental
 composition with much less hydrogen and oxygen ($\rm
-C_{106}H_{175-180}O_{35-40}N_{15–20}S_{0.3-0.5}$) than in the original
+C_{106}H_{175-180}O_{35-40}N_{15-20}S_{0.3-0.5}$) than in the original
 formula.
 
 Function \code{redfield} can be used to simplify conversions between
@@ -830,7 +837,7 @@ x / sum(x)
 or by using an alternative alternative elemental composition with:
 
 <<>>=
-stumm <- c(C=106, H=180, O=45, N=16, P=1)
+stumm <- c(C = 106, H = 180, O = 45, N = 16, P = 1)
 x <- redfield(1, "P", "mass", ratio = stumm)
 x / sum(x)
 @
@@ -864,9 +871,9 @@ The relationship between Salinity, chlorinity and conductivity is in
 various functions:
 
 <<>>=
-convert_StoCl(S=35)
-convert_RtoS(R=1)
-convert_StoR(S=35)
+convert_StoCl(S = 35)
+convert_RtoS(R = 1)
+convert_StoR(S = 35)
 @
 
 \section{Finally}

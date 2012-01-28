@@ -17,7 +17,7 @@ coriolis(lat)
 \value{
   The coriolis factor (\eqn{s^{-1}}{1/second}).
 }
-\author{Karline Soetaert < k.soetaert@nioo.knaw.nl > }
+\author{Karline Soetaert < karline.soetaert@nioz.nl > }
 \examples{
 plot(-90:90, coriolis(-90:90), xlab = "latitude, dg North", 
   ylab = "/s", main = "coriolis factor", type = "l", lwd = 2)

@@ -20,12 +20,33 @@ rownames(.marelac$SchmidtCoeff) <- c("He", "Ne", "N2", "O2", "Ar",
 
 
 ## The function itself
-gas_schmidt <- function (t=25,species=c("He", "Ne", "N2", "O2", "Ar",
-        "Kr", "Rn", "CH4","CO2", "N2O", "CCl2F2", "CCL3F",
-        "SF6", "CCl4")) {
+## thpe: make the original version to an internal one 'gas_schmidt1'
+gas_schmidt1 <- function (t = 25, species = c("He", "Ne", "N2", "O2", "Ar",
+        "Kr", "Rn", "CH4","CO2", "N2O", "CCl2F2", "CCL3F", "SF6", "CCl4")) {
 
   species <- match.arg(species, several.ok = TRUE)
   Sc <- .marelac$SchmidtCoeff[species,]
-  schmidt <- Sc$A-Sc$B*t+Sc$C*t*t-Sc$D*t*t*t
+  schmidt <- Sc$A - Sc$B * t + Sc$C * t*t - Sc$D * t*t*t
+  schmidt <- t(matrix (nrow = length(species), data = schmidt))
+  colnames(schmidt) <- species
   schmidt
 }
+
+## ThPe: now define the user-visible vectorized version
+gas_schmidt <- function (t = 25, species = c("He", "Ne", "N2", "O2", "Ar",
+        "Kr", "Rn", "CH4","CO2", "N2O", "CCl2F2", "CCL3F", "SF6", "CCl4")) {
+        
+  if ((length(t) == 1)) {
+    ## return vector for species OR temperatures
+    ret <- gas_schmidt1(t, species)
+  } else {
+    ## return a matrix for temperatures x species
+    ret <- t(sapply(X = t, FUN = function(X) gas_schmidt1(t = X, species)))
+    if (is.matrix(ret) & min(dim(ret)) > 1) 
+      colnames(ret) <- species
+    else
+      ret <- as.vector(ret)
+  }
+  ret
+}
+

@@ -9,8 +9,9 @@
   solubility coefficients.
 }
 \usage{
-gas_solubility(S = 35, t = 25, species = c("He","Ne","N2","O2",
-  "Ar","Kr","Rn","CH4","CO2","N2O","CCl2F2","CCl3F","SF6","CCl4"))
+gas_solubility(S = 35, t = 25, 
+      species = c("He", "Ne", "N2", "O2", "Ar", "Kr", "Rn", "CH4", 
+                  "CO2", "N2O", "CCl2F2", "CCl3F", "SF6", "CCl4"))
 }
 \arguments{
   \item{S }{salinity, -}
@@ -21,7 +22,7 @@ gas_solubility(S = 35, t = 25, species = c("He","Ne","N2","O2",
   The solubility, mmol/m3/bar.
 }
 \author{
-  Karline Soetaert <k.soetaert@nioo.knaw.nl>
+  Karline Soetaert <karline.soetaert@nioz.nl>
 }
 \examples{
 gas_solubility(t = 1:20,S = 35, species = "CO2")
@@ -29,16 +30,16 @@ gas_solubility(t = 0:5,S = 35,species = "O2")
 
 Temp <- seq(from = 0, to = 30, by = 0.1)
 mf <- par(mfrow = c(1, 2))
-gs  <-gas_solubility(t=Temp)
-species   <- c("CCl4","CO2","N2O","Rn","CCl2F2")
-matplot(Temp,gs[,species],type="l",lty=1,lwd=2,xlab="temperature",
-     ylab="mmol/m3",main="solubility (S=35)")
-legend("topright",col=1:5,lwd=2,legend=species)
+gs  <- gas_solubility(t = Temp)
+species   <- c("CCl4", "CO2", "N2O", "Rn", "CCl2F2")
+matplot(Temp, gs[, species], type = "l", lty = 1, lwd = 2,
+     xlab = "temperature", ylab = "mmol/m3", main = "solubility (S=35)")
+legend("topright", col = 1:5, lwd = 2, legend = species)
 
-species2 <- c("Kr","CH4","Ar","O2","N2","Ne")
-matplot(Temp,gs[,species2],type="l",lty=1,lwd=2,xlab="temperature",
-     ylab="mmol/m3",main="solubility (S=35)")
-legend("topright",col=1:6,lwd=2,legend=species2)
+species2 <- c("Kr", "CH4", "Ar", "O2", "N2", "Ne")
+matplot(Temp, gs[, species2], type = "l", lty = 1, lwd = 2,
+     xlab = "temperature", ylab = "mmol/m3", main = "solubility (S=35)")
+legend("topright", col = 1:6, lwd = 2, legend = species2)
 
 
 
@@ -51,8 +52,8 @@ lines(Temp,gas_solubility(t = Temp, species = "N2O"), col = "blue", lwd = 2)
 lines(Temp,gas_solubility(t = Temp, species = "Rn"), col = "green", lwd = 2)
 lines(Temp,gas_solubility(t = Temp, species = "CCl2F2"), col = "yellow", lwd = 2)
 
-legend("topright", col = c("black","red","blue","green","yellow"), lwd = 2,
-       legend = c("CCl4","CO2","N2O","Rn","CCl2F2"))
+legend("topright", col = c("black", "red", "blue", "green", "yellow"), lwd = 2,
+       legend = c("CCl4", "CO2", "N2O", "Rn", "CCl2F2"))
 
 plot(Temp, gas_solubility(t = Temp, species = "Kr"), xlab = "temperature",
      ylab = "mmol/m3/atm", main = "solubility (S=35)", type = "l",

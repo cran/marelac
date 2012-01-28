@@ -6,7 +6,7 @@
   to in situ temperature, 1/K
 }
 \usage{
-sw_alpha(S = 35, t = 25, p = P-1.013253, P=1.013253)
+sw_alpha(S = 35, t = 25, p = P-1.013253, P = 1.013253)
 }
 \arguments{
   \item{S }{Absolute salinity (g/kg),}
@@ -18,9 +18,10 @@ sw_alpha(S = 35, t = 25, p = P-1.013253, P=1.013253)
 \value{
   Thermal expansion coefficient, 1/K.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
-sw_alpha(35.7,25.5,102.3)#0.000309837839319264
+sw_alpha(35.7, 25.5, 102.3)#0.000309837839319264
 }
 \references{
   Feistel R, 2008. A Gibbs function for seawater thermodynamics for -6 to

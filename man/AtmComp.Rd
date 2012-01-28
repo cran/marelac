@@ -37,7 +37,7 @@ atmComp(species = c("He", "Ne", "N2", "O2", "Ar", "Kr", "CH4", "CO2",
   changing slightly each year due to increases in greenhouse gas
   concentrations.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>, Filip Meysman <f.meysman@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>, Filip Meysman <filip.meysman@nioz.nl>}
 
 \examples{
 atmComp("O2")

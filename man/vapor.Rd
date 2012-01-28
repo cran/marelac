@@ -14,7 +14,8 @@
 \value{
   The saturation vapor pressure (-).
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
 plot(0:30, vapor(t = 0:30), xlab = "Temperature, dgC", ylab = "pH2O/P")
 }

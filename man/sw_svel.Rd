@@ -10,7 +10,7 @@
 }
 \usage{
 sw_svel(S = 35, t = 25, p = P-1.013253, P = 1.013253,
-  method=c("Gibbs","UNESCO"))
+  method = c("Gibbs", "UNESCO"))
 }
 \arguments{
   \item{S }{Salinity, when \code{method} = \code{"UNESCO"}: practical salinity (-)
@@ -30,17 +30,18 @@ sw_svel(S = 35, t = 25, p = P-1.013253, P = 1.013253,
   Sound velocity for S = 40, t = 40, p = 1000 is 1731.995 using UNESCO
   polynomial.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
-sw_svel(t = 40, S = 40, p = 10:20, method="UNESCO")
+sw_svel(t = 40, S = 40, p = 10:20, method = "UNESCO")
 
 # Check value UNESCO
-sw_svel(t = 40, S = 40, p = 1000, method="UNESCO")  # 1731.995
-sw_svel(t = 0, S = 40, p = 0, method="UNESCO")      # 1455.8
+sw_svel(t = 40, S = 40, p = 1000, method = "UNESCO")  # 1731.995
+sw_svel(t = 0, S = 40, p = 0, method = "UNESCO")      # 1455.8
 
-sw_svel(t = 40, S = 25, p = 1000, method="UNESCO")  # 1719.2
-sw_svel(t = 40, S = 25, p = 0, method="UNESCO")     # 1553.4
-sw_svel(t = 0, S = 25, p = 0, method="UNESCO")      # 1435.8
+sw_svel(t = 40, S = 25, p = 1000, method = "UNESCO")  # 1719.2
+sw_svel(t = 40, S = 25, p = 0, method = "UNESCO")     # 1553.4
+sw_svel(t = 0, S = 25, p = 0, method = "UNESCO")      # 1435.8
 
 
 # Check value Gibbs

@@ -10,7 +10,7 @@
   A list specifying the value, the units, and a description for each
   physical constant.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
 \examples{
 
 data.frame(cbind(acronym = names(Constants),

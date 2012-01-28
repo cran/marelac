@@ -18,7 +18,7 @@ gas_satconc(S = 35, t = 25, P = 1.013253,
   \item{species }{character vector with gasses whose saturated concentration
     should be estimated.
   }
-  \item{atm }{the number of moles of the gas per unit mole of air in the
+  \item{atm }{The number of moles of the gas per unit mole of air in the
     atmosphere, the "mixing ratio".  When present, this overrules the
     \code{species} argument. When unspecified, the value from \code{atmComp}
     for the \code{species} is taken.
@@ -27,7 +27,8 @@ gas_satconc(S = 35, t = 25, P = 1.013253,
 \value{
    The saturated concentration of the gas in \eqn{mmol m^{-3}}{mmol/m3}.
 }
-\author{Karline Soetaert < k.soetaert@nioo.knaw.nl > }
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
 gas_satconc(species = "O2")
 Temp <- seq(from = 0, to = 30, by = 0.1)
@@ -35,17 +36,17 @@ Sal  <- seq(from = 0, to = 35, by = 0.1)
 
 mf  <- par(mfrow = c(1,2))
 
-species <- c("N2","CO2","O2","CH4","N2O")
-gsat  <-gas_satconc(t=Temp, species=species)
+species <- c("N2", "CO2", "O2", "CH4", "N2O")
+gsat  <- gas_satconc(t = Temp, species = species)
 
-matplot(Temp,gsat,type="l",xlab="temperature",log="y", lty=1,
-     ylab="mmol/m3",main="Saturated conc (S=35)", lwd=2)
-legend("right",col=1:5,lwd=2,legend=species)
+matplot(Temp, gsat, type = "l", xlab = "temperature", log = "y", lty = 1,
+     ylab = "mmol/m3", main = "Saturated conc (S=35)", lwd = 2)
+legend("right", col = 1:5, lwd = 2, legend = species)
 
-gsat  <-gas_satconc(S=Sal,species=species)
-matplot(Sal,gsat,type="l",xlab="salinity",log="y", lty=1,
-     ylab="mmol/m3",main="Saturated conc (T=20)", lwd=2)
-legend("right",col=1:5,lwd=2,legend=species)
+gsat  <- gas_satconc(S = Sal, species = species)
+matplot(Sal, gsat, type = "l", xlab = "salinity", log = "y", lty = 1,
+     ylab = "mmol/m3", main = "Saturated conc (T=20)", lwd = 2)
+legend("right", col = 1:5, lwd = 2, legend = species)
 
 
 par(mfrow = mf)
@@ -58,14 +59,14 @@ A <- data.frame(cbind( t = Temp,
             O2  = gas_satconc(t = Temp, species = "O2"),
             CO2 = gas_satconc(t = Temp, species = "CO2"),
             Ar  = gas_satconc(t = Temp, species = "Ar")))
-format(A,digits = 4)
+format(A, digits = 4)
 ## table values
 ## at  0 dg C: 635.6   359.1  23.37  17.44
 ## at 20 dg C: 425.7   230.5  11.61  11.29
 ## note the deviations for CO2 (20dg)!
 
 ## saturated concentrations in micromol/m3, at 1 atm.
-AA <- data.frame(cbind( t = Temp,
+AA <- data.frame(cbind(t = Temp,
             N2O = gas_satconc(t = Temp, species = "N2O")*1000,
             Ne  = gas_satconc(t = Temp, species = "Ne" )*1000,
             Kr  = gas_satconc(t = Temp, species = "Kr" )*1000,
@@ -89,13 +90,13 @@ format(AA, digits = 4)
 
   who cite:
 
-  for he and Ne: Weiss R, 1971. Solubility of helium and neon in water
+  for He and Ne: Weiss R, 1971. Solubility of helium and neon in water
   and seawater. Journ. Chem. Eng. Data 16, 235-241.
 
   N2, O2 and Ar: Weiss R, 1970. The solubility of nitrogen, oxygen, and
   argon in water and seawater. Deep-Sea Res. 17, 721-35.
 
-  Kr: Weiss R and Kyser TK, 1978. Silubility of Krypton in water
+  Kr: Weiss R and Kyser TK, 1978. Solubility of Krypton in water
   and seawater. Journ. Chem. Eng. Data 23, 69-72.
 
   Rn: Hackbusch 1979. Eine Methode zur Bestimmung der Diffusions-,

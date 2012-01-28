@@ -7,8 +7,8 @@
   given in mass fractions).
 }
 \usage{
-sw_comp(species=c("Na","Mg","Ca","K","Sr","Cl","SO4","HCO3",
-            "Br","CO3","BOH4","F","OH","BOH3","CO2"))
+sw_comp(species = c("Na", "Mg", "Ca", "K", "Sr", "Cl", "SO4", "HCO3",
+                    "Br", "CO3", "BOH4", "F", "OH", "BOH3", "CO2"))
 }
 \arguments{
   \item{species}{character vector with components whose composition should be
@@ -24,7 +24,7 @@ sw_comp(species=c("Na","Mg","Ca","K","Sr","Cl","SO4","HCO3",
   Deep-Sea Res. I, 55, 960-470.
 }
 
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
 
 \examples{
 sw_comp("CO2")

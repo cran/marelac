@@ -11,10 +11,12 @@ gas_O2sat <- function(S = 35, t = 25, masl = 0,
   log10 <- function(x) log(x)/log(10)
 
   method <- match.arg(method)
-  if ((S != 0) & (method != "Weiss"))
+  if (any(S != 0) & (method != "Weiss"))
       warning("Salinity value ignored by this method!")
-  if ((masl != 0) & (method != "Paul"))
+  if (any(masl != 0) & (method != "Paul"))
       warning("Sea level height ignored by this method;\n please use gas_satconc with argument P.")
+  if (! checkVecLength(list(S, t, masl)))
+      warning("Arguments 'S' and 't' should have the same length or length 1.")
 
   ret <- switch(method,
     ## American Public Health Association

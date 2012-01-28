@@ -25,7 +25,7 @@ convert_RtoS(R = 1, t = 25, p = max(0, P-1.013253), P = 1.013253)
   The conductivity ratio for Salinity = 40.0000, t = 40, p = 1000 is
   1.888091.
 }
-\author{Karline Soetaert <k.soetaert@nioo.knaw.nl>}
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
 \examples{
 convert_RtoS(R = 1.888091, t = 40, p = 1000)
 

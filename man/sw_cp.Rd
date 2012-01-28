@@ -7,8 +7,8 @@
   Valid for S = 0 to 40, T = 0 to 35 dg C
 }
 \usage{
-sw_cp(S = 35, t = 25, p = P-1.013253, P=1.013253,
-  method=c("Gibbs","UNESCO"))
+sw_cp(S = 35, t = 25, p = P-1.013253, P = 1.013253,
+      method = c("Gibbs", "UNESCO"))
 }
 \arguments{
   \item{S }{Salinity, when \code{method} = \code{"UNESCO"}: practical salinity (-)
@@ -23,7 +23,8 @@ sw_cp(S = 35, t = 25, p = P-1.013253, P=1.013253,
 \value{
   Heat capacity, in \eqn{J kg^{-1} dgC^{-1}}
 }
-\author{Karline Soetaert < k.soetaert@nioo.knaw.nl > }
+\author{Karline Soetaert <karline.soetaert@nioz.nl>}
+
 \examples{
 sw_cp(S = 40, t = 40, p = 1000, method="UNESCO")  # 3849.5
 
@@ -31,11 +32,11 @@ sw_cp(S = 40, t = 40, p = 1000, method="UNESCO")  # 3849.5
 sw_cp(35.7,25.5,102.3)#3974.42541259729
 
 # Check values UNESCO
-sw_cp(S = 25, t = 10, p = 0,    method="UNESCO")  # 4041.8
-sw_cp(S = 25, t = 10, p = 1000, method="UNESCO")  # 3842.3
-sw_cp(S = 25, t = 30, p = 0,    method="UNESCO")  # 4049.1
+sw_cp(S = 25, t = 10, p = 0,    method = "UNESCO")  # 4041.8
+sw_cp(S = 25, t = 10, p = 1000, method = "UNESCO")  # 3842.3
+sw_cp(S = 25, t = 30, p = 0,    method = "UNESCO")  # 4049.1
 
-sw_cp(S = 40, t = 10, p = 0, method="UNESCO")  # 3959.3
+sw_cp(S = 40, t = 10, p = 0, method = "UNESCO")  # 3959.3
 
 }
 \references{

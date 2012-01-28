@@ -9,16 +9,16 @@
   Based on Chapter 4 in Boudreau (1997)
 }
 \usage{diffcoeff(S = 35, t = 25, P = 1.013253,
-      species=c("H2O","O2","CO2","H2","CH4","DMS",
-      "He","Ne","Ar","Kr","Xe","Rn",
-      "N2","H2S","NH3","NO","N2O","CO","SO2",
-      "OH","F","Cl","Br","I",
-      "HCO3","CO3","H2PO4","HPO4","PO4",
-      "HS","HSO3","SO3","HSO4","SO4","IO3","NO2","NO3",
-      "H","Li","Na","K","Cs","Ag","NH4",
-      "Ca","Mg","Fe","Mn","Ba","Be","Cd","Co",
-      "Cu","Hg","Ni","Sr","Pb","Ra","Zn","Al","Ce","La","Pu",
-      "H3PO4","BOH3","BOH4","H4SiO4"))
+      species = c("H2O", "O2", "CO2", "H2", "CH4", "DMS",
+      "He", "Ne", "Ar", "Kr", "Xe", "Rn",
+      "N2", "H2S", "NH3", "NO", "N2O", "CO", "SO2",
+      "OH", "F", "Cl", "Br", "I",
+      "HCO3", "CO3", "H2PO4", "HPO4", "PO4",
+      "HS", "HSO3", "SO3", "HSO4", "SO4", "IO3", "NO2", "NO3",
+      "H", "Li", "Na", "K", "Cs","Ag","NH4",
+      "Ca", "Mg", "Fe", "Mn", "Ba", "Be", "Cd", "Co",
+      "Cu", "Hg", "Ni", "Sr", "Pb", "Ra", "Zn", "Al", "Ce",
+      "La", "Pu", "H3PO4", "BOH3", "BOH4", "H4SiO4"))
 }
 \arguments{
   \item{S }{Salinity, -,
@@ -36,12 +36,12 @@
   of the selected chemical species.
 }
 
-\author{Filip Meysman <f.meysman@nioo.knaw.nl>,
-  Karline Soetaert <k.soetaert@nioo.knaw.nl>
+\author{Filip Meysman <filip.meysman@nioz.nl>,
+  Karline Soetaert <karline.soetaert@nioz.nl>
 }
 
 \examples{
-diffcoeff(S = 15, t = 15)/(1e4*3600*24)       # cm2/day
+diffcoeff(S = 15, t = 15)*1e4*3600*24         # cm2/day
 diffcoeff(t = 10, species = "O2")             # m2/s
 difftemp <- diffcoeff(t = 0:30)[,1:13]
 matplot(0:30, difftemp, xlab = "temperature", ylab = "m2/s",
