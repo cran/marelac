@@ -20,5 +20,5 @@ export(sw_depth,sw_cp,sw_adtgrad,sw_tfreeze,sw_tpot,sw_svel,sw_dens,sw_gibbs,
        sw_kappa,sw_kappa_t)
 
 #other
-export(vertmean, redfield,atmComp, earth_surf)
+export(vertmean, redfield,atmComp, earth_surf, earth_dist)
 

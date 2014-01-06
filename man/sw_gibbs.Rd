@@ -75,7 +75,7 @@ sw_gibbs(35.16504, 0, 998.98675, dt = 1, dp = 1) #0.245708012e-6
 
 }
 \note{
-  The gibbs functgion is defined as the sum of a pure water part and the
+  The gibbs function is defined as the sum of a pure water part and the
   saline part (IAPWS-08)
 
   The coefficients from McDougall et al., 2009 were used.

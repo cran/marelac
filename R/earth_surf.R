@@ -5,7 +5,6 @@
 # Data below are from http://en.wikipedia.org/wiki/Latitude
 # Latdist, Londist =  Surface distance per 1° change in latitude/longitude
 # Latrad = N-S radius of curvature, Lat, Lonrad = E-W radius
-# all units: km
 
 
 earth_surf <- function (lat = 0, lon = 0) {
@@ -19,3 +18,35 @@ earth_surf <- function (lat = 0, lon = 0) {
   Londist <- approx(Earth$lat, Earth$Londist, abs(lat))$y
   Latdist*Londist * 1.008539 *1e6 #correct ~ 1 % error !
 }
+
+earth_dist <- function (alat, alon, blat, blon, method = 1)   {
+
+  if (any(alat > 90)  | any(blat > 90) | any(alat <  -90) | any(blat <  -90)) 
+    stop("'alat' and 'blat' should be inbetween -90 and 90")
+  if (any(alon > 180) | any(blon > 180)| any(alon < -180) | any(blon < -180)) 
+    stop("'alat' and 'blat' should be inbetween -90 and 90")
+
+# Distance in meters between two latitude/longitude pairs
+# assumes the earth is a perfect sphere
+  radius <- 6371000 # earth radius in metres
+
+  alon <- alon * pi / 180
+  alat <- alat * pi / 180
+  blon <- blon * pi / 180
+  blat <- blat * pi / 180
+
+  if (method == 1) {
+    fac <- cos(alat) * cos(blat) * (cos(alon) * cos(blon) + sin(alon)* sin(blon)) + 
+       sin(alat) * sin(blat)
+    DD <- acos(fac) * radius
+  } else {  
+    dLat = (blat-alat)
+    dLon = (blon-alon)
+    A   <- sin(dLat/2) * dLat/2 + sin(dLon/2) * dLon/2 * cos(alat) * cos(blat) 
+    fac <- 2 * atan2(sqrt(A), sqrt(1.-A)) # angular distance in radians
+    DD  <- radius * fac
+  }
+  return(DD)
+}
+
+

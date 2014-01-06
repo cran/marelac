@@ -20,10 +20,10 @@ redfield(q, species, method = c("mol", "mass"),
   
   The average elemental composition of marine plankton (Redfield ratio)
   is traditionally assumed to be
-  \eqn{C_{106}H_{263}O_{110}N_{16}P_{1}}{C106 H263 O110 N16 P1}
+  \eqn{\mathrm {C_{106}H_{263}O_{110}N_{16}P_{1}}}{C106 H263 O110 N16 P1}
   (Redfield 1934, 1963, Richards 1965). Note that while the C:N:P ratio
   is widely agreed there is still discussion about the average of O and
-  H, e.g. \eqn{C_{106}H_{180}O_{45}N_{16}P_{1}}{C106 H180 O45 N16 P1}
+  H, e.g. \eqn{\mathrm{C_{106}H_{180}O_{45}N_{16}P_{1}}}{C106 H180 O45 N16 P1}
   (Stumm, 1964).
 
   Note also that there are, of course, large differences depending on
