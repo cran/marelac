@@ -1,5 +1,5 @@
 Package: marelac
-Version: 2.1.3
+Version: 2.1.4
 Title: Tools for Aquatic Sciences
 Author: Karline Soetaert <karline.soetaert@nioz.nl>,
         Thomas Petzoldt <thomas.petzoldt@tu-dresden.de>,
@@ -20,10 +20,10 @@ Description: Datasets, constants, conversion factors, utilities for MArine, Rive
              recent derivation based on a Gibbs function.
 License: GPL (>= 2)
 LazyData: yes
-Packaged: 2014-01-06 15:16:48 UTC; rforge
+Packaged: 2014-11-03 15:46:20 UTC; rforge
 Repository: CRAN
 Repository/R-Forge/Project: marelac
-Repository/R-Forge/Revision: 175
-Repository/R-Forge/DateTimeStamp: 2014-01-06 12:55:15
-Date/Publication: 2014-01-07 10:18:48
+Repository/R-Forge/Revision: 182
+Repository/R-Forge/DateTimeStamp: 2014-11-03 15:27:59
+Date/Publication: 2014-11-04 22:03:31
 NeedsCompilation: yes

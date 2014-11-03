@@ -1,24 +1,27 @@
 useDynLib(marelac)
+
+import("seacarb", "shape")
+
 #physical
-export(gravity,coriolis,viscosity,diffcoeff,vapor,vapor.hPa,ssd2rad,
+export(gravity, coriolis, viscosity, diffcoeff, vapor, vapor.hPa, ssd2rad,
        air_density, air_spechum)
 
 #conversions from molars...
 # merged:mol.vol, mol2l , removed:l2mol, g2mol
-export(molvol,molweight)
+export(molvol, molweight)
 
 # conversions
-export(convert_StoCl,convert_RtoS,convert_StoR,convert_p,convert_T,
-       convert_AStoPS,convert_PStoAS)
+export(convert_StoCl, convert_RtoS, convert_StoR, convert_p, convert_T, 
+       convert_AStoPS, convert_PStoAS)
 
 #gasses  - suggest to merge O2sat, satconc
-export(gas_O2sat,gas_satconc,gas_solubility,gas_schmidt,gas_transfer)
+export(gas_O2sat, gas_satconc, gas_solubility, gas_schmidt, gas_transfer)
 
 #seawater
-export(sw_depth,sw_cp,sw_adtgrad,sw_tfreeze,sw_tpot,sw_svel,sw_dens,sw_gibbs,
-       sw_conserv,sw_comp,sw_alpha,sw_beta,sw_enthalpy,sw_entropy,
-       sw_kappa,sw_kappa_t)
+export(sw_depth, sw_cp, sw_adtgrad, sw_tfreeze, sw_tpot,
+       sw_svel, sw_dens, sw_gibbs, sw_conserv, sw_comp, sw_alpha,
+       sw_beta, sw_enthalpy, sw_entropy, sw_kappa, sw_kappa_t)
 
 #other
-export(vertmean, redfield,atmComp, earth_surf, earth_dist)
+export(vertmean, redfield, atmComp, earth_surf, earth_dist)
 

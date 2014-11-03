@@ -9,7 +9,7 @@ redfield <- function(q, species, method = c("mol", "mass"),
   species  <- match.arg(species, speciess)
 
   if (method == "mass") {
-    ratio <- with(atomicweight,{
+    ratio <- with(marelac::atomicweight,{
       ratio * c(C, H, O, N, P)
     })
   }

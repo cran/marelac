@@ -7,7 +7,7 @@ molweight <- function(species) {
   if (!is.character(unlist(species))) stop("species must be character")
   molweight <- function(species) {
     # atomicweight is the 'named list-version' of the IUPAC data
-    with(atomicweight, {
+    with(marelac::atomicweight, {
       ## insert * before number (with one or more digits)
       s1 <- gsub("([0-9]+)", "*\\1+", species)
       ## insert + after capital letters

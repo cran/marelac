@@ -5,6 +5,7 @@
 ## internal functions
 sw_delta_SA <- function (p0 = 0, lon0 = 0, lat0 = 0) {
   res <- NULL
+  sw_sfac <- marelac::sw_sfac # import package data set
   for (i in 1:length(lon0))
     for (j in 1:length(lat0)){
       RES <-.Fortran("gsw_delta_sa", as.double(p0),
