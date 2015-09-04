@@ -50,12 +50,17 @@ diffcoeff <- function(S = 35, t = 25, P = 1.013253, species = c("H2O",
   "Hg", "Ni", "Sr", "Pb", "Ra", "Zn", "Al", "Ce", "La", "Pu", "H3PO4",
   "BOH3", "BOH4", "H4SiO4")) {
 
-  if (any (S<0))
-    stop ("Salinity should be >= 0")
-  species  <- match.arg(species, several.ok = TRUE)
-  diffc   <- list()      # will have the result
-  diffArr <- diffChang <- diffBoud <- NULL
-  TK      <- t + 273.15  # Temperature, Kelvin
+  ## thpe: check length of arguments to avoid ambigous behavior
+  len <- c(length(S), length(t), length(P))
+  if (! all(len %in% c(1, max(len))))
+    stop("vectors of S, t and P do not match")
+
+  if (any (S < 0)) stop ("Salinity should be >= 0")
+  
+  species <- match.arg(species, several.ok = TRUE)
+  diffc   <- list()                         # will have the result
+  diffArr <- diffChang <- diffBoud <- NULL  # initialize variables
+  TK      <- t + 273.15                     # temperature, Kelvin
   Patm    <- 1.013253
 
   ##  The viscosity in pure water at atmospheric pressure and sample
@@ -135,7 +140,7 @@ diffcoeff <- function(S = 35, t = 25, P = 1.013253, species = c("H2O",
     diffc$H4SiO4 <- D_H4SiO4 * (mu_S / mu_0) * (TK / (tS + 273.15))
   }
 
-  ##  Other dissolved gases
+  ##  Other dissolved substances
   ##  Boudreau (1997)
   ##  TK <- 298.15
   Arrhenius <- function(A) A[1] * exp(-(A[2] * 1000)/(8.314472 * TK)) * 1.0E-09
@@ -143,7 +148,7 @@ diffcoeff <- function(S = 35, t = 25, P = 1.013253, species = c("H2O",
   ii  <- .marelac$ArrDat[species[which(species %in% rownames(.marelac$ArrDat))],]
   if (nrow(ii) > 0) diffArr <- apply(ii, 1, Arrhenius)
 
-  ##  Other dissolved gases
+  ##  Other dissolved substances
   ##  from Wilke and Chang (1955) as modified by Hayduk and Laudie (1974)
   WilkeChang <- function(Vb) 4.72E-07 * TK / (mu_0 * Vb[1]^0.6) * 1.0E-04
 
@@ -160,11 +165,22 @@ diffcoeff <- function(S = 35, t = 25, P = 1.013253, species = c("H2O",
   ## Simplify this
   if (is.matrix(diffc)    | is.matrix(diffChang) |
       is.matrix(diffBoud) | is.matrix(diffArr)) {
-    Diffc <- NA
-    if (length(diffc) > 0)    Diffc <- cbind(Diffc, as.data.frame(diffc))
-    if (! is.null(diffArr))   Diffc <- cbind(Diffc, diffArr)
-    if (! is.null(diffChang)) Diffc <- cbind(Diffc, data.frame(diffChang))
-    if (! is.null(diffBoud))  Diffc <- cbind(Diffc, diffBoud)
+    Diffc <- NULL
+           
+    ## thpe: xcbind is a non-exported function with more argument checking
+    Diffc <- xcbind(Diffc, diffc)
+    Diffc <- xcbind(Diffc, diffArr)
+    Diffc <- xcbind(Diffc, diffChang)
+    Diffc <- xcbind(Diffc, diffBoud)
+    
+    
+    ## thpe: alternative function with double check
+    ##       remove this after testing phase
+    #if (length(diffc)     > 0) Diffc <- xcbind(Diffc, as.data.frame(diffc))
+    #if (length(diffArr)   > 0) Diffc <- xcbind(Diffc, diffArr)
+    #if (length(diffChang) > 0) Diffc <- xcbind(Diffc, data.frame(diffChang))
+    #if (length(diffBoud)  > 0) Diffc <- xcbind(Diffc, diffBoud)
+    
     Diffc <- as.data.frame(Diffc)
   } else Diffc <- data.frame(c(diffc, diffArr, diffChang, diffBoud))
 

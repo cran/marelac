@@ -21,20 +21,21 @@
       "La", "Pu", "H3PO4", "BOH3", "BOH4", "H4SiO4"))
 }
 \arguments{
-  \item{S }{Salinity, -,
+  \item{S}{Salinity, -,
   }
-  \item{t }{Temperature, \eqn{^\circ}{degrees }C,
+  \item{t}{Temperature, \eqn{^\circ}{degrees }C,
   }
-  \item{P }{True pressure, bar,
+  \item{P}{True pressure, bar,
   }
   \item{species }{character vector with the names of the chemical species whose
    diffusion coefficient should be calculated.
   }
 }
 \value{
-  A data.frame with the diffusion coefficients \eqn{m^2 s^{-1}}{m2/sec}
+  A \code{data.frame} with the diffusion coefficients \eqn{m^2 s^{-1}}{m2/sec}
   of the selected chemical species.
 }
+
 
 \author{Filip Meysman <filip.meysman@nioz.nl>,
   Karline Soetaert <karline.soetaert@nioz.nl>
@@ -50,13 +51,27 @@ legend("topleft", ncol = 2, cex = 0.8, title = "mean", col = 1:13, lty = 1:13,
        legend = cbind(names(difftemp),
        format(colMeans(difftemp), digits = 4)))
 
+## vector-valued salinity
 select <- c("O2", "CO2", "NH3", "NH4", "NO3")
 diffsal <- diffcoeff(S = 0:35, species = select)
-matplot(0:35, diffsal,xlab = "salinity", ylab = "m2/s",
+matplot(0:35, diffsal, xlab = "salinity", ylab = "m2/s",
          main = "Molecular/ionic diffusion", type = "l")
 legend("topleft", ncol = 2, cex = 0.8, title = "mean",
        col = 1:length(select), lty = 1:length(select),
        legend = cbind(select, format(colMeans(diffsal), digits = 4)))
+
+## vector-valued temperature
+difftemp <- diffcoeff(S = 1, t=1:20, species = select)
+matplot(1:20, difftemp, xlab = "temperature", ylab = "m2/s",
+        main = "Molecular/ionic diffusion", type = "l")
+legend("topleft", ncol = 2, cex = 0.8, title = "mean",
+       col = 1:length(select), lty = 1:length(select),
+       legend = cbind(select, format(colMeans(difftemp), digits = 4)))
+
+## combination of S and t
+diffsaltemp <- diffcoeff(S = rep(c(1, 35), each = 20), 
+                         t = rep(1:20, 2), species = select)
+       
 }
 \references{
   Based on Chapter 4 in Boudreau (1997) :
@@ -137,6 +152,10 @@ legend("topleft", ncol = 2, cex = 0.8, title = "mean",
   \eqn{H_4SiO_4} : Wollast and Garrels (1971) found D(H4SiO4) at 25 deg
   C and 36.1 ppt S.  Assume that this value can be scaled by the
   Stokes-Einstein relationship to any other temperature.
+
+  Arguments salinity, temperature or pressure can be vectors. In order to avoid 
+  confusion, S, t and P must have either same length or length 1. More flexible 
+  combinationsare of course possible with \code{\link{expand.grid}}
   
 }
 \seealso{

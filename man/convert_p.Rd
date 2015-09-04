@@ -16,7 +16,7 @@ convert_p(x, unit = c("Pa", "bar", "at", "atm", "torr"))
 \value{
   A data frame with converted values.
 }
-\references{\url{http://en.wikipedia.org/wiki/Bar\_(unit)}}
+\references{\url{http://en.wikipedia.org/wiki/Bar_(unit)}}
 
 %\seealso{}
 \examples{

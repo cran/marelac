@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 # based on data that give the surface distance per 1 dg change in lat/lon
 # Data below are from http://en.wikipedia.org/wiki/Latitude
-# Latdist, Londist =  Surface distance per 1° change in latitude/longitude
+# Latdist, Londist =  Surface distance per 1 deg change in latitude/longitude
 # Latrad = N-S radius of curvature, Lat, Lonrad = E-W radius
 
 
@@ -21,9 +21,9 @@ earth_surf <- function (lat = 0, lon = 0) {
 
 earth_dist <- function (alat, alon, blat, blon, method = 1)   {
 
-  if (any(alat > 90)  | any(blat > 90) | any(alat <  -90) | any(blat <  -90)) 
+  if (any(alat > 90)  | any(blat > 90) | any(alat <  -90) | any(blat <  -90))
     stop("'alat' and 'blat' should be inbetween -90 and 90")
-  if (any(alon > 180) | any(blon > 180)| any(alon < -180) | any(blon < -180)) 
+  if (any(alon > 180) | any(blon > 180)| any(alon < -180) | any(blon < -180))
     stop("'alat' and 'blat' should be inbetween -90 and 90")
 
 # Distance in meters between two latitude/longitude pairs
@@ -36,13 +36,13 @@ earth_dist <- function (alat, alon, blat, blon, method = 1)   {
   blat <- blat * pi / 180
 
   if (method == 1) {
-    fac <- cos(alat) * cos(blat) * (cos(alon) * cos(blon) + sin(alon)* sin(blon)) + 
+    fac <- cos(alat) * cos(blat) * (cos(alon) * cos(blon) + sin(alon)* sin(blon)) +
        sin(alat) * sin(blat)
     DD <- acos(fac) * radius
-  } else {  
+  } else {
     dLat = (blat-alat)
     dLon = (blon-alon)
-    A   <- sin(dLat/2) * dLat/2 + sin(dLon/2) * dLon/2 * cos(alat) * cos(blat) 
+    A   <- sin(dLat/2) * dLat/2 + sin(dLon/2) * dLon/2 * cos(alat) * cos(blat)
     fac <- 2 * atan2(sqrt(A), sqrt(1.-A)) # angular distance in radians
     DD  <- radius * fac
   }

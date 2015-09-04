@@ -10,7 +10,7 @@ rhoH2O_Chen <- function(S = 0, t = 25, p) {
   # Limnol. Oceanogr. 31 No. 3, 657 - 662
   # rho in g/cm^3
   # P in bar - surface = 0 bar.
-  # t in °C
+  # t in deg C
   P <- p
   rho0 <- 0.9998395 + 0.000067914 * t -
           0.0000090894 * t * t + 0.00000010171 * t * t * t -
@@ -23,7 +23,7 @@ rhoH2O_Chen <- function(S = 0, t = 25, p) {
 
 
 sw_dens <- function(S=35, t=25, p=max(0, P-1.013253), P=1.013253,
-                   method=c("Gibbs","UNESCO", "Chen")) {
+                   method=c("Gibbs", "UNESCO", "Chen")) {
   if (any (S < 0))
     stop ("Salinity should be >= 0")
   method <- match.arg(method)

@@ -15,7 +15,7 @@ atomicweight
   the IUPAC table of atomic weights.
   This data frame has following colums: Number, Name,
   Symbol, Weight, Footnotes.
-  
+
   Note that as in the IUPAC table, the Weight is
   given as a text rather than as numeric objects. It comprises the standard
   values and the uncertainties (in parentheses, following the last significant
@@ -24,7 +24,7 @@ atomicweight
 
   The lower case version \code{atomicweight} is a simplified list that only
   contains the weights (as numeric values) and allows symbolic
-  computations with elements to arrive at molecular weights. 
+  computations with elements to arrive at molecular weights.
 }
 \author{Thomas Petzoldt}
 \details{
@@ -43,14 +43,14 @@ AtomicWeight[AtomicWeight$Symbol == "C",]
 atomicweight$C
 with(atomicweight, C)
 
-## it can also be used to calculate molecular weights 
+## it can also be used to calculate molecular weights
 ## via symbolic computation
 with(atomicweight, H * 2 + O)
 }
 \references{
   Wieser ME, 2006. Atomic weights of the elements 2005 (IUPAC
   Technical Report). Pure Appl. Chem. 78 (11), 2051--2066.,
-  2006. \url{http://dx.doi.org/10.1351/pac200678112051}
+  2006. DOI: 10.1351/pac200678112051
 }
 \seealso{
 other datasets:  \code{\link{Bathymetry}},

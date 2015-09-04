@@ -1,6 +1,7 @@
 useDynLib(marelac)
 
 import("seacarb", "shape")
+importFrom("stats", "approx", "uniroot")
 
 #physical
 export(gravity, coriolis, viscosity, diffcoeff, vapor, vapor.hPa, ssd2rad,
@@ -11,7 +12,7 @@ export(gravity, coriolis, viscosity, diffcoeff, vapor, vapor.hPa, ssd2rad,
 export(molvol, molweight)
 
 # conversions
-export(convert_StoCl, convert_RtoS, convert_StoR, convert_p, convert_T, 
+export(convert_StoCl, convert_RtoS, convert_StoR, convert_p, convert_T,
        convert_AStoPS, convert_PStoAS)
 
 #gasses  - suggest to merge O2sat, satconc
