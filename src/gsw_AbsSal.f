@@ -39,11 +39,11 @@ c result              : Absolute Salinity anomaly          [g/kg]
 
         integer indx0, indy, indz 
         integer k, deli(4), delj(4) 
-        real*8 p0, p0_original, longs0, lats0, sa_upper
-        real*8 sa_lower, delta
-        real*8 longs(nx), lats(ny), p(nz), del_sa(nz,ny,nx)
-            real*8 dlongs, dlats
-        real*8 r1, s1, t1, dsa(4), ndepth(ny,nx), ndepth_max
+        real(kind=8) p0, p0_original, longs0, lats0, sa_upper
+        real(kind=8) sa_lower, delta
+        real(kind=8) longs(nx), lats(ny), p(nz), del_sa(nz,ny,nx)
+        real(kind=8) dlongs, dlats
+        real(kind=8) r1, s1, t1, dsa(4), ndepth(ny,nx), ndepth_max
         logical ISNAN
 
         data deli/0,1,1,0/, delj/0,0,1,1/
@@ -155,9 +155,10 @@ c result              : absolute salinity anomaly of data        [g/kg]
 
        integer k, nmean, above_line0, above_line(4)
 
-       real*8 dsa_add(4), dsa(4), dsa_mean
-       real*8 longs_pan(6), lats_pan(6), longs0, lats0, r, lats_line
-       real*8 longs, lats, dlongs, dlats
+       real(kind=8) dsa_add(4), dsa(4), dsa_mean
+       real(kind=8) longs_pan(6), lats_pan(6), longs0, lats0, r
+       real(kind=8) lats_line
+       real(kind=8) longs, lats, dlongs, dlats
 
        data longs_pan/260.0000, 272.5900, 276.5000, 278.6500,                  &
      &      280.7300, 292.000/ 
@@ -241,8 +242,8 @@ c result        : nanmean of the 4 adjacent neighbours     [g/kg]
         implicit none
 
         integer k, nmean
-        real*8 dsa(4)
-        real*8 dsa_mean, dsa_add(4)
+        real(kind=8) dsa(4)
+        real(kind=8) dsa_mean, dsa_add(4)
 
         nmean = 0
         dsa_mean = 0.d0
@@ -285,10 +286,10 @@ c   CREATED:        June 1993
 c
 
        implicit none
-         character(len=80) msg
+C      character(len=80) msg
 
        integer n,k,ku,km,kl
-         real*8 x(n),z
+       real(kind=8) x(n),z
 
        if(x(1).lt.z.and.z.lt.x(n)) then
 
@@ -340,7 +341,7 @@ c result              : interpolated value
 
         implicit none
         integer n, k
-        real*8 x(n), y(n), x0, r, xinterp1
+        real(kind=8) x(n), y(n), x0, r, xinterp1
 
         call indx(x,n,x0,k)
 

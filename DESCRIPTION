@@ -1,5 +1,5 @@
 Package: marelac
-Version: 2.1.5
+Version: 2.1.6
 Title: Tools for Aquatic Sciences
 Author: Karline Soetaert <karline.soetaert@nioz.nl>,
         Thomas Petzoldt <thomas.petzoldt@tu-dresden.de>,
@@ -7,8 +7,8 @@ Author: Karline Soetaert <karline.soetaert@nioz.nl>,
 Maintainer: Karline Soetaert <karline.soetaert@nioz.nl>
 Depends: R (>= 2.10), shape, seacarb
 Imports: stats
-Description: Datasets, constants, conversion factors, utilities for MArine, Riverine,
-             Estuarine, LAcustrine and Coastal science. 
+Description: Datasets, constants, conversion factors, and utilities for 'MArine', 'Riverine',
+             'Estuarine', 'LAcustrine' and 'Coastal' science. 
              The package contains among others: (1) chemical and
              physical constants and datasets, e.g. atomic weights, gas
              constants, the earths bathymetry; (2) conversion factors
@@ -21,10 +21,10 @@ Description: Datasets, constants, conversion factors, utilities for MArine, Rive
              recent derivation based on a Gibbs function.
 License: GPL (>= 2)
 LazyData: yes
-Packaged: 2015-09-03 22:38:02 UTC; rforge
+Packaged: 2016-09-09 08:45:43 UTC; rforge
 Repository: CRAN
 Repository/R-Forge/Project: marelac
-Repository/R-Forge/Revision: 188
-Repository/R-Forge/DateTimeStamp: 2015-09-03 22:22:34
-Date/Publication: 2015-09-04 09:25:55
+Repository/R-Forge/Revision: 192
+Repository/R-Forge/DateTimeStamp: 2016-09-09 08:42:11
+Date/Publication: 2016-09-19 11:13:27
 NeedsCompilation: yes

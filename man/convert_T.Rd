@@ -22,7 +22,9 @@ convert_T(x, unit = c("K", "C", "F"))
   Mangum BW and Furukawa GT, 1990. Guidelines for Realizing the
   International Temperature Scale of 1990 (ITS-90). NIST Technical Note
   1265.
-  \url{http://www.cstl.nist.gov/div836/836.05/papers/magnum90ITS90guide.pdf}
+  and the url 
+  
+  http://www.cstl.nist.gov/div836/836.05/papers/magnum90ITS90guide.pdf
 }
 
 %\seealso{}

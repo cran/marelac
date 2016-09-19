@@ -1,4 +1,4 @@
-0e344dcd64764901360b4f4924227521 *DESCRIPTION
+621ee0e7af1333036119a8a5c0b96975 *DESCRIPTION
 8e9509e61d0d93868a6195bb7601a878 *NAMESPACE
 d1fc1f73196b70fcb1548c7408e63a38 *R/aaa.R
 8041047ba3a30dff23ce6ec90321dfdc *R/air.R
@@ -23,8 +23,8 @@ df6c7528d5e4377283c7756e633c08c9 *R/molvol.R
 c33d8ed55e592c6409e42c35afd08240 *R/redfield.R
 bb1b042ce6ffa607e696374ac564a63c *R/ssd2rad.R
 fe46fb42b406f66b3917c061cf1887ac *R/sw_adtgrad.R
-ea5c5911153e5265ebabb91ba9cdb4a7 *R/sw_alpha.R
-7d8b794861a6de834841fc21591d41b0 *R/sw_beta.R
+ea03d899b66d007a9d57512adcc566c4 *R/sw_alpha.R
+5308ced793e04af5feb19ca0d3955c82 *R/sw_beta.R
 74aaea1924725ccafab6d65acea396b1 *R/sw_comp.R
 21e6ba4307b9a91a4595f48ce870ff87 *R/sw_conserv.R
 71fbcb2bc5234aa1e255883d5e07e572 *R/sw_cp.R
@@ -32,7 +32,7 @@ ea5c5911153e5265ebabb91ba9cdb4a7 *R/sw_alpha.R
 634f6cfdda1dc1a1baca63ee45064fb5 *R/sw_depth.R
 6bfb4d38bc08f42a242a63f8cee0f070 *R/sw_enthalpy.R
 4327765db8ccb01adf3f44d307f68669 *R/sw_entropy.R
-a3ccc68f0a55b38238cbc9780c41a6dc *R/sw_gibbs.R
+b590f16ac2b3a670962b4c72f7936d1c *R/sw_gibbs.R
 7fdeda5caa4b55712b21a72c583d06f3 *R/sw_kappa.R
 6263cec8f30cd9c1b4f4cc9d9875aaf1 *R/sw_kappa_t.R
 e6351a2ef61deae408bd16c454cb4b62 *R/sw_tfreeze.R
@@ -43,12 +43,12 @@ a31b19a712e14fa5d7a1bcd44f684e15 *R/vapor.R
 e0e8bada4f3b35d3ffacd5277d598282 *R/vertmean.R
 96ed3240563bf5f0b0d13dd27e7e9676 *R/viscosity.R
 bc99c685754a966fde02f0aed3d3b0d0 *R/xcbind.R
-67e333d6148a50f452a3fc5c411ed1d0 *build/vignette.rds
-807bec0a6f2d76a61c0e268ad75a5fc8 *data/AtomicWeight.rda
-619ee4355ec1eb8c64d66e3d019f2ddd *data/Bathymetry.rda
-51fcdc80615318ece6224e2030e4763a *data/Constants.rda
-be30095a34a0d9a6fe0ed22c70f5d901 *data/Oceans.rda
-339e79214007226a72d2982cf04fc1c0 *data/sw_sfac.rda
+7608540fb9a0589a50faa79bb7de294d *build/vignette.rds
+4ca2a2ad0dc9035ed7d42dc7c8934f37 *data/AtomicWeight.rda
+bcf4ce984221f22d7c438a97dc1968fa *data/Bathymetry.rda
+a44bd9f94f499b47907da6c5febfe932 *data/Constants.rda
+48405ea16e5ceba3a9cbc8c09c130a58 *data/Oceans.rda
+1b2f809964e28d5c18bf8cfdbaceef85 *data/sw_sfac.rda
 edf487a5354dc09f6660b5b0b889bbc3 *inst/doc/marelac.R
 22360a88d14385a6753ba929bfd8a84a *inst/doc/marelac.Rnw
 4649a6c5bf05a60c20b029ec3469b474 *inst/doc/marelac.pdf
@@ -62,7 +62,7 @@ f6a416eda2d899d2b75be51c002de674 *man/air_spechum.Rd
 9665607a08f3a020d823aa95321062e3 *man/convert_RtoS.Rd
 a15008a2c9e57f53ebed30b5a616aaa7 *man/convert_StoCl.Rd
 ed9b1304e34e08a2e39e7e93fe7c2218 *man/convert_StoR.Rd
-9f785a31b527e6e5a8e7345c26524ee7 *man/convert_T.Rd
+237167e6271fe8103e677253e830f3dd *man/convert_T.Rd
 02b2c3f6d7be70fab5ea3f66a5ad63e1 *man/convert_p.Rd
 13675ba01e92f9e6642243cd4e139167 *man/convert_salinity.Rd
 e3c6a9aba611a9afb5466bdf14a973c8 *man/coriolis.Rd
@@ -101,7 +101,7 @@ e8f1aa8c7e0102c6c594b8fd3f759cf5 *man/vapor.Rd
 e338aca6499bb3434a0daff1834be671 *man/vapor.hPa.Rd
 72bd4dcb5e94ad26baceadc3cf1ef11e *man/vertmean.Rd
 83070af7afe2c9427da939f2de982edf *man/viscosity.Rd
-ca8daf74e1277aaaf7a9f3ecfb9c38db *src/gsw_AbsSal.f
+1ffd583e0ddff44640e0cc68ecaf8aad *src/gsw_AbsSal.f
 d31d2a661650cfc90813f9dc17a68d47 *vignettes/bathymetry.jpeg
 22360a88d14385a6753ba929bfd8a84a *vignettes/marelac.Rnw
 6bd17013a3e45df8e2bea3bb45b3953e *vignettes/vignettes.bib
