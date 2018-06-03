@@ -47,6 +47,9 @@ gas_schmidt <- function (t = 25, species = c("He", "Ne", "N2", "O2", "Ar",
     else
       ret <- as.vector(ret)
   }
+  if (length(ret) == 1) 
+      ret <- as.vector(ret)
+   
   ret
 }
 

@@ -1,12 +1,19 @@
 Package: marelac
-Version: 2.1.6
+Version: 2.1.9
 Title: Tools for Aquatic Sciences
-Author: Karline Soetaert <karline.soetaert@nioz.nl>,
-        Thomas Petzoldt <thomas.petzoldt@tu-dresden.de>,
-        Filip Meysman <filip.meysman@nioz.nl>
+Authors@R: c(person("Karline","Soetaert", role = c("aut", "cre"), 
+                     email = "karline.soetaert@nioz.nl"),
+             person("Thomas","Petzoldt", role = c("aut"),
+                     email = "thomas.petzoldt@tu-dresden.de"),
+             person("Filip", "Meysman",role = "cph"),
+             person("Lorenz", "Meire", role = "cph"))
+Author: Karline Soetaert [aut, cre],
+  Thomas Petzoldt [aut],
+  Filip Meysman [cph],
+  Lorenz Meire [cph]
 Maintainer: Karline Soetaert <karline.soetaert@nioz.nl>
-Depends: R (>= 2.10), shape, seacarb
-Imports: stats
+Depends: R (>= 3.2), shape
+Imports: stats, seacarb
 Description: Datasets, constants, conversion factors, and utilities for 'MArine', 'Riverine',
              'Estuarine', 'LAcustrine' and 'Coastal' science. 
              The package contains among others: (1) chemical and
@@ -21,10 +28,7 @@ Description: Datasets, constants, conversion factors, and utilities for 'MArine'
              recent derivation based on a Gibbs function.
 License: GPL (>= 2)
 LazyData: yes
-Packaged: 2016-09-09 08:45:43 UTC; rforge
-Repository: CRAN
-Repository/R-Forge/Project: marelac
-Repository/R-Forge/Revision: 192
-Repository/R-Forge/DateTimeStamp: 2016-09-09 08:42:11
-Date/Publication: 2016-09-19 11:13:27
 NeedsCompilation: yes
+Packaged: 2018-06-03 17:15:27 UTC; thpe
+Repository: CRAN
+Date/Publication: 2018-06-03 17:43:25 UTC

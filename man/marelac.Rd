@@ -2,11 +2,11 @@
 \alias{marelac-package}
 \alias{marelac}
 \docType{package}
-\title{
-  Tools for Aquatic Sciences
-}
+
+\title{\packageTitle{marelac}}
+
 \description{
-  
+
   R-package marelac has been designed as a tool for use by scientists
   working in the MArine, Riverine, Estuarine, LAcustrine and Coastal
   sciences.
@@ -19,12 +19,12 @@
     \item utility functions, e.g. to estimate concentrations of conservative
       substances as a function of salinity, ...
   }
-  
-  
+
+
  About the symbols used.
- 
+
  Here we adopt the symbolism as in McDougall et al., 2009:
- 
+
  \itemize{
  \item S for practical (-) or absolute salinity, (g/kg)
  \item P for absolute (total) pressure (bar)
@@ -37,26 +37,18 @@
   Many of the functions are from the UNESCO 1983 paper, or from Feistel, 2008.
   Note that in these papers, pressure is expressed in dbar.
 }
-\details{
-  \tabular{ll}{
-    Package: \tab marelac\cr
-    Type: \tab Package\cr
-    Version: \tab 2.1.4\cr
-    Date: \tab 2014-10-29\cr
-    License: \tab GNU Public License 2 or above\cr
-  }
-}
+
+
 \author{
   Karline Soetaert (Maintainer)
 
-  Filip Meysman
-  
   Thomas Petzoldt
-  
-  with contributions from Lorenz Meire
+
+  with contributions from Lorenz Meire and Filip Meysman
+
 }
 \references{
-  
+
   For solubilities, atmospheric composition, gas exchange coefficients:
 
   Sarmiento JL and Gruber N, 2006. Ocean Biogeochemical
