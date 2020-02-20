@@ -10,11 +10,11 @@
 */    
 
 
-void F77_NAME(gsw_delta_sa)(double*, double*,  double*, double*, double*, int*, double*, double*);
+void F77_NAME(gsw_delta_sa)(double*, double*,  double*, double*, double*, double *, double*, double*, double*);
      
 
 R_FortranMethodDef marelacfortranMethods[] = {
- {"gsw_delta_sa",(DL_FUNC) &F77_SUB(gsw_delta_sa), 8},
+ {"gsw_delta_sa",(DL_FUNC) &F77_SUB(gsw_delta_sa), 9},
  {NULL, NULL, 0}
 };
 
