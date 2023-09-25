@@ -6,7 +6,7 @@
   \code{earth_surf} computes the surface of 1d by 1dg grid cells as a function of latitude.
   
   Based on data that give the surface distance per 1 dg change in lat/lon
-  from \url{http://en.wikipedia.org/wiki/Latitude}
+  from \url{https://en.wikipedia.org/wiki/Latitude}
   
   \code{earth_dist} calculates the distance between two (lat, lon) points
 }

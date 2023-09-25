@@ -41,9 +41,9 @@ sw_dens(S = 35, t = 25, p = max(0, P-1.013253), P = 1.013253,
 }
 
 \references{
-  Chen Ch.-T. and Millero FJ, 1986. Precise thermodynamic properties
+  Chen Ch.-T. and Millero FJ, 1986. Thermodynamic properties
   of natural waters covering only the limnological
-  range. Limnol. Oceanogr. 31 No. 3, 657 - 662.
+  range. Limnol. Oceanogr. 31 No. 3, 657 - 662. \doi{10.4319/lo.1986.31.3.0657}
 
   Fofonoff NP and Millard RC Jr, 1983. Algorithms for computation of
   fundamental properties of seawater. UNESCO technical papers in marine
@@ -60,7 +60,9 @@ sw_dens(S = 35, t = 25, p = max(0, P-1.013253), P = 1.013253,
 
 }
 
-\seealso{\code{\link[seacarb]{rho}} in package seacarb.
+\seealso{
+
+\code{rho} in package seacarb.
 
 \code{\link{sw_adtgrad}}, \code{\link{sw_alpha}}, \code{\link{sw_beta}},
 \code{\link{sw_comp}}, \code{\link{sw_conserv}}, \code{\link{sw_cp}},

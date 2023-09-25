@@ -65,7 +65,7 @@
 
   Fofonoff NP and Millard RC Jr, 1983. Algorithms for computation of
   fundamental properties of seawater. UNESCO technical papers in marine
-  science, 44, 53 pp.\cr
+  science, 44, 53 pp.
   \url{http://unesdoc.unesco.org/images/0005/000598/059832EB.pdf}
 
   or the more recent report and papers:

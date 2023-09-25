@@ -29,7 +29,7 @@ ssd2rad(S, doy, a = 0.25, b = 0.5, rho = 50.29)
 %% ToDo: find international reference or remove function from package
 \references{
   Dyck S and Peschke G., 1995. Grundlagen der Hydrologie. 3. Auflage.
-  Verlag f\enc{ü}{ue}r Bauwesen, Berlin 1995, ISBN 3-345-00586-7.
+  Verlag f\enc{?}{ue}r Bauwesen, Berlin 1995, ISBN 3-345-00586-7.
 }
 
 \examples{

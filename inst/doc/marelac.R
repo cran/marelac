@@ -9,7 +9,7 @@ options(width=75)
 
 
 ###################################################
-### code chunk number 2: marelac.Rnw:133-137
+### code chunk number 2: marelac.Rnw:125-129
 ###################################################
 data.frame(cbind(acronym = names(Constants),
              matrix(ncol = 3, byrow = TRUE, data = unlist(Constants),
@@ -18,7 +18,7 @@ data.frame(cbind(acronym = names(Constants),
 
 
 ###################################################
-### code chunk number 3: marelac.Rnw:145-148
+### code chunk number 3: marelac.Rnw:137-140
 ###################################################
 data.frame(cbind(acronym = names(Oceans),
              matrix(ncol = 3, byrow = TRUE, data = unlist(Oceans),
@@ -26,7 +26,7 @@ data.frame(cbind(acronym = names(Oceans),
 
 
 ###################################################
-### code chunk number 4: marelac.Rnw:183-187
+### code chunk number 4: marelac.Rnw:175-179
 ###################################################
 SURF <- outer(X = Bathymetry$x,
               Y = Bathymetry$y,
@@ -35,7 +35,7 @@ sum(SURF)
 
 
 ###################################################
-### code chunk number 5: marelac.Rnw:192-195
+### code chunk number 5: marelac.Rnw:184-187
 ###################################################
  sum(SURF*(Bathymetry$z < 0))
 
@@ -43,7 +43,7 @@ sum(SURF)
 
 
 ###################################################
-### code chunk number 6: marelac.Rnw:202-210
+### code chunk number 6: marelac.Rnw:194-202
 ###################################################
 SurfDepth <- vector()
 
@@ -70,7 +70,7 @@ plot(dseq[-1], SurfDepth, xlab="depth, m", log = "y",
 
 
 ###################################################
-### code chunk number 9: marelac.Rnw:239-242
+### code chunk number 9: marelac.Rnw:231-234
 ###################################################
 AtomicWeight
 AtomicWeight[8, ]
@@ -78,7 +78,7 @@ AtomicWeight[8, ]
 
 
 ###################################################
-### code chunk number 10: marelac.Rnw:250-253
+### code chunk number 10: marelac.Rnw:242-245
 ###################################################
 atmComp("O2")
 atmComp()
@@ -100,14 +100,14 @@ plot(-90:90, coriolis(-90:90), xlab = "latitude, dg North",
 
 
 ###################################################
-### code chunk number 13: marelac.Rnw:288-290
+### code chunk number 13: marelac.Rnw:280-282
 ###################################################
 diffcoeff(S = 15, t = 15)*24*3600*1e4  # cm2/day
 diffcoeff(t = 10)$O2
 
 
 ###################################################
-### code chunk number 14: marelac.Rnw:294-295
+### code chunk number 14: marelac.Rnw:286-287
 ###################################################
 difftemp <- diffcoeff(t = 0:30)[ ,1:13]
 
@@ -153,14 +153,14 @@ legend("topright", col = c("black", "red", "blue"), lty = 1,
 
 
 ###################################################
-### code chunk number 19: marelac.Rnw:348-350
+### code chunk number 19: marelac.Rnw:340-342
 ###################################################
 gas_O2sat(t = 20)
 t <- seq(0, 30, 0.1)
 
 
 ###################################################
-### code chunk number 20: marelac.Rnw:355-356
+### code chunk number 20: marelac.Rnw:347-348
 ###################################################
 gas_O2sat(S=35, t=20)*1000/molweight("O2")
 
@@ -190,7 +190,7 @@ legend("topright", c("S=35", "S=0"), col = c("red","green"),
 
 
 ###################################################
-### code chunk number 23: marelac.Rnw:386-389
+### code chunk number 23: marelac.Rnw:378-381
 ###################################################
 gas_satconc(species = "O2")
 Temp <- seq(from = 0, to = 30, by = 0.1)
@@ -276,7 +276,7 @@ plot(0:30, vapor(t = 0:30), xlab = "Temperature, dgC", ylab = "pH2O/P",
 
 
 ###################################################
-### code chunk number 28: marelac.Rnw:462-465
+### code chunk number 28: marelac.Rnw:454-457
 ###################################################
 gas_schmidt(species = "CO2", t = 20)
 
@@ -318,20 +318,20 @@ legend("topleft", lty = 1:4, lwd = 2, legend = c("Liss and Merlivat 1986",
 
 
 ###################################################
-### code chunk number 31: marelac.Rnw:500-501
+### code chunk number 31: marelac.Rnw:492-493
 ###################################################
 sw_conserv(S = seq(0, 35, by = 5))
 
 
 ###################################################
-### code chunk number 32: marelac.Rnw:521-523
+### code chunk number 32: marelac.Rnw:513-515
 ###################################################
 convert_AStoPS(S = 35)
 convert_PStoAS(S = 35)
 
 
 ###################################################
-### code chunk number 33: marelac.Rnw:550-559
+### code chunk number 33: marelac.Rnw:542-551
 ###################################################
 convert_PStoAS(S = 35, lat = -10, lon = 0)
 convert_PStoAS(S = 35, lat = 0, lon = 0)
@@ -395,14 +395,14 @@ contour(sw_sfac$longs, sw_sfac$p, dsal, asp = TRUE, add = TRUE)
 
 
 ###################################################
-### code chunk number 38: marelac.Rnw:620-622
+### code chunk number 38: marelac.Rnw:612-614
 ###################################################
 sw_cp(S = 40,t = 1:20)
 sw_cp(S = 40,t = 1:20, method = "UNESCO")
 
 
 ###################################################
-### code chunk number 39: marelac.Rnw:628-641
+### code chunk number 39: marelac.Rnw:620-633
 ###################################################
 t  <-  25.5
 p  <- 1023/10  # pressure in bar
@@ -520,7 +520,7 @@ par (mfrow = c(1, 1))
 
 
 ###################################################
-### code chunk number 46: marelac.Rnw:741-746
+### code chunk number 46: marelac.Rnw:733-738
 ###################################################
 1/molweight("CO3")
 1/molweight("HCO3")
@@ -530,7 +530,7 @@ molweight(c("SiOH4", "NaHCO3", "C6H12O6", "Ca(HCO3)2", "Pb(NO3)2", "(NH4)2SO4"))
 
 
 ###################################################
-### code chunk number 47: marelac.Rnw:752-757
+### code chunk number 47: marelac.Rnw:744-749
 ###################################################
 #species <- colnames(gs)  ## thpe: does not work any more, because 1D return value is vector
 species = c("He", "Ne", "N2", "O2",
@@ -556,14 +556,14 @@ text(mw, gs, species)
 
 
 ###################################################
-### code chunk number 50: marelac.Rnw:780-782
+### code chunk number 50: marelac.Rnw:772-774
 ###################################################
 molvol(species = "ideal")
 molvol(species = "ideal", t = 1:10)
 
 
 ###################################################
-### code chunk number 51: marelac.Rnw:784-787
+### code chunk number 51: marelac.Rnw:776-779
 ###################################################
 1/molvol(species = "O2", t = 0)*1000
 1/molvol(species = "O2", q = 1:6, t = 0)
@@ -571,32 +571,32 @@ molvol(species = "ideal", t = 1:10)
 
 
 ###################################################
-### code chunk number 52: marelac.Rnw:810-811
+### code chunk number 52: marelac.Rnw:802-803
 ###################################################
 redfield(1, "P")
 
 
 ###################################################
-### code chunk number 53: marelac.Rnw:817-818
+### code chunk number 53: marelac.Rnw:809-810
 ###################################################
 redfield(1, "N")
 
 
 ###################################################
-### code chunk number 54: marelac.Rnw:825-826
+### code chunk number 54: marelac.Rnw:817-818
 ###################################################
 redfield(2, "P", "mass")
 
 
 ###################################################
-### code chunk number 55: marelac.Rnw:831-833
+### code chunk number 55: marelac.Rnw:823-825
 ###################################################
 x <- redfield(1, "P", "mass")
 x / sum(x)
 
 
 ###################################################
-### code chunk number 56: marelac.Rnw:838-841
+### code chunk number 56: marelac.Rnw:830-833
 ###################################################
 stumm <- c(C = 106, H = 180, O = 45, N = 16, P = 1)
 x <- redfield(1, "P", "mass", ratio = stumm)
@@ -604,19 +604,19 @@ x / sum(x)
 
 
 ###################################################
-### code chunk number 57: marelac.Rnw:854-855
+### code chunk number 57: marelac.Rnw:846-847
 ###################################################
 convert_p(1, "atm")
 
 
 ###################################################
-### code chunk number 58: marelac.Rnw:863-864
+### code chunk number 58: marelac.Rnw:855-856
 ###################################################
 convert_T(1, "C")
 
 
 ###################################################
-### code chunk number 59: marelac.Rnw:872-875
+### code chunk number 59: marelac.Rnw:864-867
 ###################################################
 convert_StoCl(S = 35)
 convert_RtoS(R = 1)

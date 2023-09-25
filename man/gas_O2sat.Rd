@@ -47,12 +47,12 @@ Manual. U.S. Environmental Protection Agency, Athens,
 Georgia. EPA/600/3-87/007, p. 41. http://www.epa.gov)
 
 DIN 38408-23, Ausgabe:1987-11: Deutsche Einheitsverfahren zur Wasser-,
-Abwasser- und Schlammuntersuchung; Gasf\enc{ö}{oe}rmige Bestandteile
-(Gruppe G); Bestimmung des Sauerstoffs\enc{ä}{ae}ttigungsindex (G 23).
+Abwasser- und Schlammuntersuchung; Gasf\enc{?}{oe}rmige Bestandteile
+(Gruppe G); Bestimmung des Sauerstoffs\enc{?}{ae}ttigungsindex (G 23).
 
 Paul L, 1985. Das thermische Regime der Talsperre Saidenbach und
 einige Beziehungen zwischen abiotischen und biotischen
-Komponenten. Dissertation, TU Dresden, Fakult\enc{ä}{ae}t Bau-, Wasser-
+Komponenten. Dissertation, TU Dresden, Fakult\enc{?}{ae}t Bau-, Wasser-
 und Forstwesen. 84 pp.
 
 Weiss R, 1970. The solubility of nitrogen, oxygen, and argon in water
@@ -60,7 +60,7 @@ and seawater. Deep-Sea Research 17, 721-35.
 
 Wagner R, 1979. Die Praxis der Bestimmung des biochemischen
 Sauerstoffbedarfs - Ergebnisse einer Umfrage (Berichtigung und
-Erg\enc{ä}{ae}nzung zur Ver\enc{ö}{oe}ffentlichung). Vom Wasser 53,
+Erg\enc{?}{ae}nzung zur Ver\enc{?}{oe}ffentlichung). Vom Wasser 53,
 S. 283-285.
 }
 

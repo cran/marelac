@@ -115,7 +115,7 @@ legend("topleft",c("Global", "Atlantic", "Pacific", "Indian", "Southern"),
   \url{http://www.ocean-sci-discuss.net/6/215/2009/}
   
   Uses the Fortran code written by David Jackett.
-  \url{http://www.marine.csiro.au/~jackett/TEOS-10/}
+  \url{http://www.teos-10.org/}
 }
 \seealso{
 \code{\link{convert_RtoS}}, \code{\link{convert_StoR}},

@@ -86,7 +86,7 @@ axis(1); axis(2); box()
   Cleveland:Chemical Rubber Co.
 
   as found in:
-  \url{http://en.wikipedia.org/wiki/Van_der_Waals_constants_(data_page)}
+  \url{https://en.wikipedia.org/wiki/Van_der_Waals_constants_(data_page)}
 }
 
 \keyword{utilities}

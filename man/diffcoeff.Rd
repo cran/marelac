@@ -159,7 +159,7 @@ diffsaltemp <- diffcoeff(S = rep(c(1, 35), each = 20),
 
   Arguments salinity, temperature or pressure can be vectors. In order to avoid 
   confusion, S, t and P must have either same length or length 1. More flexible 
-  combinationsare of course possible with \code{\link{expand.grid}}
+  combinations are of course possible with \code{expand.grid}
   
 }
 \seealso{

@@ -100,7 +100,7 @@ format(AA, digits = 4)
   and seawater. Journ. Chem. Eng. Data 23, 69-72.
 
   Rn: Hackbusch 1979. Eine Methode zur Bestimmung der Diffusions-,
-  L\enc{ö}{oe}slichkeits un Permeabilitats Konstanten von Radon-222 in
+  L\enc{?}{oe}slichkeits un Permeabilitats Konstanten von Radon-222 in
   Wasser und Meereswasser. Dissertation, University of Heidelberg,
   Germany.
 

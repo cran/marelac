@@ -39,16 +39,12 @@ The Netherlands
 Thomas Petzoldt\\
 Technische Universit\"at Dresden\\
 Germany
-\And
-Filip Meysman\\
-NIOZ-Yerseke\\
-The Netherlands
 }
 
-\Plainauthor{Karline Soetaert, Thomas Petzoldt and Filip Meysman}
+\Plainauthor{Karline Soetaert and Thomas Petzoldt}
 
 \Abstract{
-  \R{ }package \m \citep{marelac} contains chemical and physical
+  \R{ }package \m contains chemical and physical
   constants and functions, datasets, routines for unit conversion, and
   other utilities useful for MArine, Riverine, Estuarine, LAcustrine
   and Coastal sciences.
@@ -68,12 +64,7 @@ The Netherlands
   Technische Universit\"at Dresden\\
   01062 Dresden, Germany\\
   E-mail: \email{thomas.petzoldt@tu-dresden.de}\\
-  URL: \url{http://tu-dresden.de/Members/thomas.petzoldt/}\\
-  \\
-  Filip Meysman\\
-  Royal Netherlands Institute of Sea Research (NIOZ)\\
-  4401 NT Yerseke, Netherlands\\
-  E-mail: \email{filip.meysman@nioz.nl}
+  URL: \url{http://tu-dresden.de/Members/thomas.petzoldt/}
 }
 
 
@@ -85,6 +76,7 @@ The Netherlands
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Begin of the document
 \begin{document}
+\SweaveOpts{concordance=FALSE}
 \SweaveOpts{engine=R,eps=FALSE}
 \SweaveOpts{keep.source=TRUE}
 
@@ -796,8 +788,8 @@ is traditionally assumed to be $\rm C_{106}H_{263}O_{110}N_{16}P_{1}$
 sometimes assume a ratio of $\rm C_{106}H_{180}O_{45}N_{16}P_{1}$
 \citep{Stumm1964}. Since then, the ratio of C:N:P was widely agreed,
 but there is still discussion about the average of O and H.
-\citet{Anderson1995} proposed a new formula $\rm
-C_{106}H_{175}O_{42}N_{16}P_{1}$ for marine plankton and similarly
+\citet{Anderson1995} proposed a new formula 
+$\rm C_{106}H_{175}O_{42}N_{16}P_{1}$ for marine plankton and similarly
 \citet{Hedges2002}, who used NMR analysis, found an elemental
 composition with much less hydrogen and oxygen ($\rm
 C_{106}H_{175-180}O_{35-40}N_{15-20}S_{0.3-0.5}$) than in the original
